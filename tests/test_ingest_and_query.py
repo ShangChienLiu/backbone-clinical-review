@@ -1,6 +1,7 @@
 """Regression cases curated from independent model-generated drafts."""
 
 import json
+from contextlib import closing
 from pathlib import Path
 from subprocess import run
 import sys
@@ -10,7 +11,7 @@ from unittest.mock import patch
 from xml.sax.saxutils import escape
 from zipfile import ZipFile
 
-from ledger import database, ingest
+from ledger import database, get_events, ingest
 from review import cohort_review, route, window_review
 from test_incremental_certainty import PATIENT, PLAN, visit
 
@@ -152,8 +153,65 @@ class SavedLedgerTest(TestCase):
         stale = json.loads(payload)
         stale["goal_status"] = "met"
         stale["certainty"]["algorithm_version"] = 0
+        del stale["events"]
+        del stale["review_start"]
         self.db.execute("UPDATE patient_weeks SET payload=? WHERE monday=?", (json.dumps(stale), week))
         result = self.compare_cohort(*WEEKS)
         patient, = result["two_consecutive_below"]
         pair, = patient["pairs"]
         self.assertEqual(pair["statuses"], ["not met", "not met"])
+
+    def test_compact_cohort_reads_one_batch_and_handles_missing_rows(self):
+        self.prepare_cohort([(6, 50), (8, 50), (13, 50), (14, 50), (16, 40)])
+        for source in sorted(self.delivery.glob("*.txt")):
+            self.add("other-" + source.name, source.read_text(encoding="utf-8")
+                     .replace("Ellis Demo | MRN: ZZ-M100", "Beta Test | MRN: ZZ-M200"))
+        ingest(self.db, self.delivery)
+        expected = self.compare_cohort(*WEEKS)
+        self.assertEqual(len(expected["two_consecutive_below"]), 2)
+        statements = []
+        self.db.set_trace_callback(statements.append)
+        try:
+            self.assertEqual(cohort_review(self.db, *WEEKS, compact=True), expected)
+        finally:
+            self.db.set_trace_callback(None)
+        reads = [sql for sql in statements if "FROM patient_weeks" in sql]
+        self.assertEqual(len(reads), 1)
+        self.assertIn("json_extract", reads[0])
+
+        self.db.execute("DELETE FROM patient_weeks WHERE patient_id=?", (PATIENT,))
+        self.assertEqual(cohort_review(self.db, *WEEKS, compact=True), expected)
+        self.db.execute("DELETE FROM patient_weeks")
+        self.assertEqual(cohort_review(self.db, *WEEKS, compact=True), expected)
+        with patch("review._projected_week_rows", return_value=None):
+            self.assertEqual(cohort_review(self.db, *WEEKS, compact=True), expected)
+
+    def test_compact_cohort_keeps_fallback_on_same_read_snapshot(self):
+        self.prepare_cohort([(6, 50), (8, 50), (13, 50), (14, 50), (16, 40)])
+        self.db.execute("PRAGMA journal_mode=WAL")
+        expected = self.compare_cohort(*WEEKS)
+        self.assertTrue(expected["two_consecutive_below"])
+        with self.db:
+            self.db.execute("DELETE FROM patient_weeks WHERE monday='2026-04-13'")
+        amendment = self.root / "amendment"
+        amendment.mkdir()
+        (amendment / "correction.txt").write_text(
+            "Document ID: ZZ-D199\nClinical addendum | Individual psychotherapy\n"
+            "Patient: Ellis Demo | MRN: ZZ-M100\n"
+            "Applies to encounter ZZ-E005, service date 2026-04-16\n"
+            "Corrected patient-contact: 09:00-09:55.\nSigned: D. Provider\n", encoding="utf-8")
+        applied = False
+
+        def read_and_publish(db, patient, start, end):
+            nonlocal applied
+            if db is self.db and not applied:
+                applied = True
+                with closing(database(self.target)) as writer:
+                    self.assertEqual(ingest(writer, amendment)["weeks_recomputed"], 1)
+            return get_events(db, patient, start, end)
+
+        with patch("review.get_events", side_effect=read_and_publish):
+            self.assertEqual(cohort_review(self.db, *WEEKS, compact=True), expected)
+        self.assertTrue(applied)
+        after = self.compare_cohort(*WEEKS)
+        self.assertFalse(after["two_consecutive_below"])

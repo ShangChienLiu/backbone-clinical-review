@@ -4,7 +4,8 @@ from __future__ import annotations
 import itertools
 import json
 import re
-from collections import Counter
+import sqlite3
+from collections import Counter, defaultdict
 from datetime import date, timedelta
 
 from certainty import ALGORITHM_VERSION, determine
@@ -165,13 +166,13 @@ def cached_weeks(db, patient_id, start, end):
         (patient_id, first, end))}
 
 
-def review_weeks(db, patient_id, start, end, events=None, facts=None):
-    cached = cached_weeks(db, patient_id, start, end)
+def review_weeks(db, patient_id, start, end, events=None, facts=None, *, saved=None):
+    cached = cached_weeks(db, patient_id, start, end) if saved is None else saved
     weeks = []
     for day in weeks_between(start, end):
         first, last = max(day.isoformat(), start), min((day + 6 * DAY).isoformat(), end)
         existing = cached.get(day.isoformat())
-        if (existing and (existing["review_start"], existing["review_end"]) == (first, last)
+        if (existing and (existing.get("review_start"), existing.get("review_end")) == (first, last)
                 and existing.get("certainty", {}).get("algorithm_version") == ALGORITHM_VERSION):
             weeks.append(existing)
             continue
@@ -217,21 +218,80 @@ def symptom_review(db, patient_id, start, end, focus=()):
             "retrospective_summaries": [c for c in rows if c["kind"] == "retrospective_summary"], "issues": flags}
 
 
-def cohort_review(db, start, end, *, compact=False):
-    if date.fromisoformat(start) > date.fromisoformat(end):
-        raise ValueError("Review start is later than review end")
+def _projected_week_rows(db, start, end):
+    monday = week_start(date.fromisoformat(start)).isoformat()
+    try:
+        return db.execute("""
+            SELECT patient_id, monday,
+                   json_extract(payload, '$.review_start') AS review_start,
+                   json_extract(payload, '$.review_end') AS review_end,
+                   json_extract(payload, '$.goal_status') AS goal_status,
+                   json_type(payload, '$.plan') = 'object' AS has_plan,
+                   json_type(payload, '$.episode_scope') = 'object' AS has_episode,
+                   json_extract(payload, '$.complete_week_claimed') AS complete,
+                   json_extract(payload, '$.events') AS events
+            FROM patient_weeks
+            WHERE monday BETWEEN ? AND ?
+              AND json_extract(payload, '$.certainty.algorithm_version') = ?
+            ORDER BY patient_id, monday
+        """, (monday, end, ALGORITHM_VERSION))
+    except sqlite3.OperationalError as error:
+        # Python can be linked to older SQLite builds and ledgers may predate the cache.
+        if str(error) not in {"no such function: json_extract", "no such table: patient_weeks"}:
+            raise
+        return None
+
+
+def _projected_weeks_for_patients(rows, patient_ids):
+    """Merge ordered week rows with patient IDs, including patients with no saved weeks."""
+    groups = itertools.groupby(rows, key=lambda row: row["patient_id"])
+    current_id, group = next(groups, (None, ()))
+    for patient_id in patient_ids:
+        while current_id is not None and current_id < patient_id:
+            current_id, group = next(groups, (None, ()))
+        # Blank or mismatched rows are evaluated by the same path as a detailed review.
+        yield {
+            row["monday"]: {
+                "monday": row["monday"],
+                "review_start": row["review_start"],
+                "review_end": row["review_end"],
+                "certainty": {"algorithm_version": ALGORITHM_VERSION},
+                "goal_status": row["goal_status"],
+                "plan": bool(row["has_plan"]),
+                "episode_scope": bool(row["has_episode"]),
+                "complete_week_claimed": bool(row["complete"]),
+                "events": json.loads(row["events"]),
+            } for row in group
+        } if current_id == patient_id else {}
+
+
+def _cohort_patients(db, rows):
+    names_by_id = patients(db)
+    if rows is None:
+        for patient_id, names in names_by_id.items():
+            episodes = get_claims(db, patient_id, ("episode",))
+            yield patient_id, names, [claim["value"] for claim in episodes], None
+        return
+
+    episodes_by_id = defaultdict(list)
+    for patient_id, payload in db.execute("SELECT patient_id,payload FROM claims WHERE kind='episode'"):
+        episodes_by_id[patient_id].append(json.loads(payload)["value"])
+    for (patient_id, names), saved in zip(names_by_id.items(), _projected_weeks_for_patients(rows, names_by_id)):
+        yield patient_id, names, episodes_by_id.get(patient_id, ()), saved
+
+
+def _review_collection(db, start, end, compact, rows):
     definite, uncertain, comparison = [], [], []
-    for patient_id, names in patients(db).items():
-        bounds = get_claims(db, patient_id, ("episode",))
+    for patient_id, names, bounds, saved in _cohort_patients(db, rows):
         if len(bounds) == 1:
-            first, last = bounds[0]["value"]
+            first, last = bounds[0]
             first, last = max(first, start), min(last, end)
             if first > last:
                 continue
         else:
             first, last = start, end
         review = None if compact else window_review(db, patient_id, first, last)
-        weeks = review_weeks(db, patient_id, first, last) if compact else review["weeks"]
+        weeks = review_weeks(db, patient_id, first, last, saved=saved) if compact else review["weeks"]
         pair_results = []
         for a, b in zip(weeks, weeks[1:]):
             if not a["plan"] or not b["plan"]:
@@ -258,6 +318,22 @@ def cohort_review(db, start, end, *, compact=False):
     if compact:
         result["detail"] = "summary"
     return result
+
+
+def cohort_review(db, start, end, *, compact=False):
+    if date.fromisoformat(start) > date.fromisoformat(end):
+        raise ValueError("Review start is later than review end")
+    # Cached rows, scopes, and fallback reads belong to one SQLite snapshot.
+    db.execute("SAVEPOINT cohort_review")
+    rows = None
+    try:
+        if compact:
+            rows = _projected_week_rows(db, start, end)
+        return _review_collection(db, start, end, compact, rows)
+    finally:
+        if rows is not None:
+            rows.close()
+        db.execute("RELEASE cohort_review")
 
 
 def plan_changes(db, patient_id, start, end):
