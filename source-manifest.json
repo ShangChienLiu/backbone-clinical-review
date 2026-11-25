@@ -1,0 +1,300 @@
+{
+  "development_mirrors": [
+    {
+      "repo": "jeromebanks/backbone",
+      "commit": "3ec8f5714d161afaf8db2a88389c98670552d26e",
+      "questions_exact": true,
+      "questions_equal": true
+    },
+    {
+      "repo": "armaanamatya/backbone",
+      "commit": "bdfddbf858ed6d20c2afaf321fed872970548436",
+      "questions_exact": true,
+      "questions_equal": true
+    }
+  ],
+  "evaluation_source_commit": "21c8d74457544fb80eaea617a6b6b0d748a92a4c",
+  "questions_sha256": "603f3f06ca1fc145d1694b1e0ee93a8e69a9b0bc011e289494d3fb2281be5a90",
+  "records": [
+    {
+      "path": "documents/BH-D101_group_content_2026-01-19.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D101_group_content_2026-01-19.txt",
+      "sha256": "05a234a8adc98e72a51ba9e82c13e5975ee5026f03bb03e66575015b22562fb6"
+    },
+    {
+      "path": "documents/BH-D102_original_attendance_2026-01-19.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D102_original_attendance_2026-01-19.txt",
+      "sha256": "514ca20809f682607e91b924c6cef0bb22f43a3d12cedbd23ea5fa362910cce5"
+    },
+    {
+      "path": "documents/BH-D103_attendance_correction_2026-01-20.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D103_attendance_correction_2026-01-20.txt",
+      "sha256": "674440968b5d6d38d68b8b513cc7ac3b3516ddd97285bde1e4af69cb9f128bd9"
+    },
+    {
+      "path": "documents/BH-D104_resent_roster_received_2026-01-26.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D104_resent_roster_received_2026-01-26.txt",
+      "sha256": "f3f25065559f4e82b110b5c284df5c2c4f81c55c950721e7bd6a9c23a91241d5"
+    },
+    {
+      "path": "documents/BH-D105_individual_2026-01-19.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D105_individual_2026-01-19.txt",
+      "sha256": "91fd8e8b1b3182207971dbecd77e3d2bd13e5f49608f4083e4a9245b8a2d8935"
+    },
+    {
+      "path": "documents/BH-D106_telehealth_2026-01-21.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D106_telehealth_2026-01-21.txt",
+      "sha256": "09c946a2248a5a81b2c1dc85b7620babe57b72f1bd4bed3d49eba574be5ccd46"
+    },
+    {
+      "path": "documents/BH-D107_group_activity_records_2026-01-22_and_29.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D107_group_activity_records_2026-01-22_and_29.txt",
+      "sha256": "c5953bcb242ef0143301019cf06964a4b759d432e26dc0e34f0ad1c2b819df70"
+    },
+    {
+      "path": "documents/BH-D108_final_attendance_and_cancellation_register.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D108_final_attendance_and_cancellation_register.txt",
+      "sha256": "805b2c69c7fa18ab31b618b4a313c39dcdbde570cc0890de2dfd52d77ca547e1"
+    },
+    {
+      "path": "documents/BH-D109_care_coordination_2026-01-23.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D109_care_coordination_2026-01-23.txt",
+      "sha256": "069ea4112779b68e7ba7bc9d06a73a6ad6dbb8110d7a1e7dfd3307769c6305be"
+    },
+    {
+      "path": "documents/BH-D110_individual_primary_record_2026-01-26.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D110_individual_primary_record_2026-01-26.txt",
+      "sha256": "4b64c46a13b80c09ec46d1cbb7b577dbfe8027cb62366631c15efa8ec1a1f58b"
+    },
+    {
+      "path": "documents/BH-D111_individual_second_record_2026-01-26.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D111_individual_second_record_2026-01-26.txt",
+      "sha256": "d03451942797c3fb189a5083c80950887657a79d0d1da9bb7f74bda8731d9380"
+    },
+    {
+      "path": "documents/BH-D112_draft_note_and_charge_extract_2026-01-27.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D112_draft_note_and_charge_extract_2026-01-27.txt",
+      "sha256": "b4390ed6b672381f671aae23dbfa937d9c5585ca4b6db83cd811797e2a34505f"
+    },
+    {
+      "path": "documents/BH-D113_family_therapy_2026-01-30.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D113_family_therapy_2026-01-30.txt",
+      "sha256": "36764827bcb39caf2e9304c881f55e4acba9744a9792228bf36981f19a0feaf9"
+    },
+    {
+      "path": "documents/BH-D114_medication_management_2026-01-30.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D114_medication_management_2026-01-30.txt",
+      "sha256": "9942bd886fcd2158bbd56914551519397d70eef7103b6d33ba2fa90cc424093c"
+    },
+    {
+      "path": "documents/BH-D115_symptom_measure_review_2026-01-30.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/BH-D115_symptom_measure_review_2026-01-30.txt",
+      "sha256": "4a3859fd81fc5afc5533e9add8718ce4b89492121bf68f812f73db92d319755e"
+    },
+    {
+      "path": "documents/early_appointment_status_export.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/early_appointment_status_export.txt",
+      "sha256": "0bf056f3769e7daf39941514e6f3e1c40c99cbc00dbb4228ee0fac07d9f75f96"
+    },
+    {
+      "path": "documents/early_group_attendance_roster.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/early_group_attendance_roster.txt",
+      "sha256": "6f205f89f8d3dbd05094e647925bb3c5955f11e9fb44f255f8cdedc3edb49616"
+    },
+    {
+      "path": "documents/family_cofacilitator_jan09.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/family_cofacilitator_jan09.txt",
+      "sha256": "ad416fbda80683308baa15c433c7d1df7fe9221b9e8baf1f2189964bc0421aed"
+    },
+    {
+      "path": "documents/family_primary_jan09.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/family_primary_jan09.txt",
+      "sha256": "924dee06b05c0a841c3f86d0c394c7af39447db6c9ea7b643cc6eb3a3c40df6b"
+    },
+    {
+      "path": "documents/group_authorization_letter.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/group_authorization_letter.txt",
+      "sha256": "d2240979a2de7d7782a34a6ca26e289ee829d01eea9932e4d61b3588c724ceb1"
+    },
+    {
+      "path": "documents/group_cancellation_notice_jan15.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/group_cancellation_notice_jan15.txt",
+      "sha256": "5f3375f11c857ad3e9917ad2eefffffd5ee0412e6ab56885901c1b5d5b2115f9"
+    },
+    {
+      "path": "documents/group_facilitator_jan06.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/group_facilitator_jan06.txt",
+      "sha256": "5edddc6b20937ecdadf834b331c399375d0889d12a8595eb4084f1da2d4f4a11"
+    },
+    {
+      "path": "documents/group_facilitator_jan12.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/group_facilitator_jan12.txt",
+      "sha256": "d30d18d0335d5d428acea2e5ee0334fbbafc10665133a462061a01c94baa09b7"
+    },
+    {
+      "path": "documents/imported_measure_summary_received_jan26.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/imported_measure_summary_received_jan26.txt",
+      "sha256": "85e2c780abded9efe663fd61ac6e6a7a56e5b30c9597b24f35f90076b6f7358b"
+    },
+    {
+      "path": "documents/individual_therapy_jan14.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/individual_therapy_jan14.txt",
+      "sha256": "8c2fbaf5bb4545cc4590b288d768ab893a4d727f6946bcc88339669d0629eb8a"
+    },
+    {
+      "path": "documents/intake_and_individual_jan05.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/intake_and_individual_jan05.txt",
+      "sha256": "7f5f7d4bbfc9b47a632fb33cca1b261999078d058cbd7601c63f6c6e5be3c747"
+    },
+    {
+      "path": "documents/medication_review_jan13.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/medication_review_jan13.txt",
+      "sha256": "95debafd3a72e32fd806d7aa4b420b1984f9c565d2af3c0d807269ee71aa8482"
+    },
+    {
+      "path": "documents/missed_visit_outreach_jan08.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/missed_visit_outreach_jan08.txt",
+      "sha256": "4521a120a4d7a8f896d5fe9137a44f72719adc5cadbd839ef1b9d9646316b7c4"
+    },
+    {
+      "path": "documents/partner_collateral_jan16.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/partner_collateral_jan16.txt",
+      "sha256": "432c973d1a4d505b49ba85c3c92dead5c2a70faca6b6dd66e87db92b95329fea"
+    },
+    {
+      "path": "documents/signed_treatment_plan_jan05.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/signed_treatment_plan_jan05.txt",
+      "sha256": "3b3f50db40b348bdd9e3baeb64b67a11d5edaf12699954762bec9633ad79ad12"
+    },
+    {
+      "path": "documents/symptom_measure_review_jan16.txt",
+      "source": "https://raw.githubusercontent.com/jeromebanks/backbone/3ec8f5714d161afaf8db2a88389c98670552d26e/documents/symptom_measure_review_jan16.txt",
+      "sha256": "300a30dbe42be8dcfdf7ad644f23c583259611467ae32e944e8d7154c78b968e"
+    },
+    {
+      "path": "evaluation-documents/LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt",
+      "sha256": "b146a81ff4db6f2afba3ad3b991667586d204cb1542e9f0e217ac9d3b8aafd50"
+    },
+    {
+      "path": "evaluation-documents/LRC-202_group_signin_sheet_paper_2026-03-03.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-202_group_signin_sheet_paper_2026-03-03.txt",
+      "sha256": "12a88a952b9f3ba74baefa9508830e75c739f6b2bb8025a60cb02ff9645e590a"
+    },
+    {
+      "path": "evaluation-documents/LRC-203_attendance_amendment_2026-03-04.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-203_attendance_amendment_2026-03-04.txt",
+      "sha256": "f1d4013ae9c44c4e669454a80ff85a60f9006162b1613827f6227437e872d823"
+    },
+    {
+      "path": "evaluation-documents/LRC-204_group_progress_notes_2026-03-03_10_12.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-204_group_progress_notes_2026-03-03_10_12.txt",
+      "sha256": "7595e52e776f50e5536d71826006bc9022d390bb0061539871df893aed621470"
+    },
+    {
+      "path": "evaluation-documents/LRC-205_charge_reconciliation_worksheet_2026-03-05.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-205_charge_reconciliation_worksheet_2026-03-05.txt",
+      "sha256": "f14f832c95fb4d5ae3dd145b20b071004497d754bd0586e48508fd29d64325fa"
+    },
+    {
+      "path": "evaluation-documents/LRC-206_telehealth_individual_2026-03-09.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-206_telehealth_individual_2026-03-09.txt",
+      "sha256": "58f8bc17f2b2bec6e1d4daaa77da72a0622ca0b3a3909f692938f246267c43f9"
+    },
+    {
+      "path": "evaluation-documents/LRC-207_care_coordination_call_2026-03-11.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-207_care_coordination_call_2026-03-11.txt",
+      "sha256": "ff9c4926a7c0153b18f6667023bd370c0cd8d7d5f84882e10b4c1e2fb571295c"
+    },
+    {
+      "path": "evaluation-documents/LRC-208_treatment_plan_update_2026-03-12.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-208_treatment_plan_update_2026-03-12.txt",
+      "sha256": "653bf19f70a346544c0ec049ee4dd4499926d4b15ff9e16b1b67f17f1b2970f6"
+    },
+    {
+      "path": "evaluation-documents/LRC-209_individual_session_narrative_2026-03-16.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-209_individual_session_narrative_2026-03-16.txt",
+      "sha256": "a880059dd332c41afa00cfeee016adaa064fe5edf513ff63b6c29c484d9fbc0e"
+    },
+    {
+      "path": "evaluation-documents/LRC-210_group_note_batch_2026-03-17_19_24_26.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-210_group_note_batch_2026-03-17_19_24_26.txt",
+      "sha256": "92e070e025d3d8d7b6c341d6386567a5e858dff66589a9add488738583914b38"
+    },
+    {
+      "path": "evaluation-documents/LRC-211_family_session_2026-03-17.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-211_family_session_2026-03-17.txt",
+      "sha256": "afe46e06bb984514471afa21bfce8f8f0ebb58342704979ccd50a080dea443ea"
+    },
+    {
+      "path": "evaluation-documents/LRC-211_family_session_rescan.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-211_family_session_rescan.txt",
+      "sha256": "afe46e06bb984514471afa21bfce8f8f0ebb58342704979ccd50a080dea443ea"
+    },
+    {
+      "path": "evaluation-documents/LRC-212_individual_session_raman_2026-03-23.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-212_individual_session_raman_2026-03-23.txt",
+      "sha256": "016f1e531125a0fc03b20cf918565210a3d7be557a0014f2939d2dfc39e07524"
+    },
+    {
+      "path": "evaluation-documents/LRC-213_consulting_psychologist_note_2026-03-23.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-213_consulting_psychologist_note_2026-03-23.txt",
+      "sha256": "bcca6d764dde50c6dd96827fd738baa6855ce8b998d5bd6ffde2a7732676cf61"
+    },
+    {
+      "path": "evaluation-documents/LRC-214_inbound_fax_index_sheet_2026-03-24.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-214_inbound_fax_index_sheet_2026-03-24.txt",
+      "sha256": "a7344ab3c095c5f009dfe1deffc55b11d40797872b5be035307ad64d7b1c3a55"
+    },
+    {
+      "path": "evaluation-documents/LRC-215_medication_evaluation_2026-03-25.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-215_medication_evaluation_2026-03-25.txt",
+      "sha256": "7138daed5161fa9855e58551374f5284fef5b175546dfefb0bcb0acc89bd90cb"
+    },
+    {
+      "path": "evaluation-documents/LRC-216_attendance_disposition_report_2026-03.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-216_attendance_disposition_report_2026-03.txt",
+      "sha256": "1098317a7a368a8fbc39beb5f205260b8397c291e8f743f3a51acccb0112becd"
+    },
+    {
+      "path": "evaluation-documents/LRC-301_master_treatment_plan_brennan_2026-02-23.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-301_master_treatment_plan_brennan_2026-02-23.txt",
+      "sha256": "0b35939584958afc3402f6c5fe254da3a8b991d3ed2910d506aedf3d7cb83405"
+    },
+    {
+      "path": "evaluation-documents/LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+      "sha256": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b"
+    },
+    {
+      "path": "evaluation-documents/LRC-303_process_group_member_notes_brennan_2026-03.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-303_process_group_member_notes_brennan_2026-03.txt",
+      "sha256": "d274d20c9b74ed4234fc51242914272c4f0f6acba4b7def346474881df820e30"
+    },
+    {
+      "path": "evaluation-documents/LRC-304_individual_note_brennan_2026-03-10.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-304_individual_note_brennan_2026-03-10.txt",
+      "sha256": "f6d080b8d75a73b7e6e6c198c4ae4e1d9af2a7d84b3358152c3cf53f38b572f7"
+    },
+    {
+      "path": "evaluation-documents/LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+      "sha256": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134"
+    },
+    {
+      "path": "evaluation-documents/LRC-306_client_visit_register_brennan_2026-03.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-306_client_visit_register_brennan_2026-03.txt",
+      "sha256": "178e037f420bd58cf3e8e05892fc589da2d2ff2dbf0f7a3e95902d95237faf3b"
+    },
+    {
+      "path": "evaluation-documents/LRC-307_individual_note_in_progress_brennan_2026-03-24.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-307_individual_note_in_progress_brennan_2026-03-24.txt",
+      "sha256": "888c640f22613ca29907d469c7e28879f505eef01b1020dfc9e074115606ed97"
+    },
+    {
+      "path": "evaluation-documents/LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "source": "https://raw.githubusercontent.com/aktanazat/backbone-careledger/21c8d74457544fb80eaea617a6b6b0d748a92a4c/examples/holdout/documents/LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "sha256": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45"
+    }
+  ]
+}

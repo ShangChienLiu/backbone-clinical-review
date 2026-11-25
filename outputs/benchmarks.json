@@ -1,0 +1,129 @@
+{
+  "environment": {
+    "python": "3.14.6",
+    "system": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "processor": "arm64"
+  },
+  "corpora": {
+    "rowan_development": {
+      "files": 31,
+      "unique_documents": 31,
+      "duplicate_files": 0,
+      "claims": 162,
+      "sqlite_bytes": 389120,
+      "cold_ingest": {
+        "n": 20,
+        "median_ms": 27.05,
+        "p95_ms": 27.883
+      },
+      "cold_extraction": {
+        "n": 20,
+        "median_ms": 20.062,
+        "p95_ms": 21.142
+      },
+      "cold_reconciliation": {
+        "n": 20,
+        "median_ms": 3.365,
+        "p95_ms": 4.014
+      },
+      "cached_ingest": {
+        "n": 20,
+        "median_ms": 1.087,
+        "p95_ms": 1.242
+      },
+      "warm_query": {
+        "n": 200,
+        "median_ms": 0.563,
+        "p95_ms": 0.623
+      },
+      "separate_process_query": {
+        "n": 20,
+        "median_ms": 44.399,
+        "p95_ms": 49.92
+      },
+      "model_calls": 0,
+      "model_tokens": 0,
+      "model_api_cost_usd": 0
+    },
+    "external_evaluation": {
+      "files": 25,
+      "unique_documents": 24,
+      "duplicate_files": 1,
+      "claims": 178,
+      "sqlite_bytes": 380928,
+      "cold_ingest": {
+        "n": 20,
+        "median_ms": 21.294,
+        "p95_ms": 21.894
+      },
+      "cold_extraction": {
+        "n": 20,
+        "median_ms": 15.542,
+        "p95_ms": 15.782
+      },
+      "cold_reconciliation": {
+        "n": 20,
+        "median_ms": 3.338,
+        "p95_ms": 3.562
+      },
+      "cached_ingest": {
+        "n": 20,
+        "median_ms": 0.712,
+        "p95_ms": 0.726
+      },
+      "warm_query": {
+        "n": 200,
+        "median_ms": 0.519,
+        "p95_ms": 0.545
+      },
+      "separate_process_query": {
+        "n": 20,
+        "median_ms": 43.58,
+        "p95_ms": 46.581
+      },
+      "model_calls": 0,
+      "model_tokens": 0,
+      "model_api_cost_usd": 0
+    }
+  },
+  "correction_ablation": {
+    "encounter": "HG-E110",
+    "cross_checked_minutes": 60,
+    "with_field_specific_correction": [
+      60
+    ],
+    "without_correction": [
+      75
+    ],
+    "absolute_error_minutes": 15
+  },
+  "incremental_work": {
+    "late_departure_amendment": {
+      "new_documents": 1,
+      "encounters_recomputed": 1,
+      "weeks_recomputed": 1,
+      "elapsed_seconds": 0.0027047499897889793
+    },
+    "complete_register": {
+      "new_documents": 1,
+      "encounters_recomputed": 0,
+      "weeks_recomputed": 1,
+      "elapsed_seconds": 0.0021166669903323054
+    },
+    "duplicate_retransmission": {
+      "new_documents": 0,
+      "encounters_recomputed": 0,
+      "weeks_recomputed": 0,
+      "elapsed_seconds": 0.0006215830217115581
+    }
+  },
+  "assertions": {
+    "reference_review_results": "passed",
+    "byte_duplicate_invariance": "passed",
+    "incremental_correction_and_restart": "passed",
+    "synthetic_signed_contact_addendum": "passed",
+    "incremental_scope_update": "passed",
+    "two_cohort_classifications": "passed",
+    "plan_change_and_distinct_assessments": "passed"
+  }
+}

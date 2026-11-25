@@ -1,0 +1,712 @@
+{
+  "patient_id": "LR-60714",
+  "window": [
+    "2026-02-20",
+    "2026-03-29"
+  ],
+  "assessments": [
+    {
+      "date": "2026-02-20",
+      "instrument": "GAD-7",
+      "assessment_ids": [],
+      "score": 16,
+      "status": "documented",
+      "administered_scores": [
+        16
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        16
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-02-20",
+          "digest": "0b35939584958afc3402f6c5fe254da3a8b991d3ed2910d506aedf3d7cb83405",
+          "document_id": "LRC-301",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 9,
+          "path": "LRC-301_master_treatment_plan_brennan_2026-02-23.txt",
+          "quote": "Nadia is a 29-year-old graduate student on medical leave from her master's program since January. She reports depressed mood most days since the fall, poor concentration, oversleeping, and panic attacks (about 4 a week) that started on public transit. Intake 02/20/2026: PHQ-9 = 19, GAD-7 = 16. PHQ-9 item 9 scored 1 (passive thoughts that she would be better off going to sleep and not waking, several days); no plan, no intent, no history of attempts. Safety plan completed 02/20 and a copy given to the client.",
+          "role": "administered",
+          "service": "group",
+          "value": {
+            "assessment_id": null,
+            "instrument": "GAD-7",
+            "score": 16
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-02-20",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 15,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "GAD-7: 16 (02/20) -> 15 (03/03) -> 11 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "GAD-7",
+            "score": 16
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-02-20",
+      "instrument": "PHQ-9",
+      "assessment_ids": [],
+      "score": 19,
+      "status": "documented",
+      "administered_scores": [
+        19
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        19
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-02-20",
+          "digest": "0b35939584958afc3402f6c5fe254da3a8b991d3ed2910d506aedf3d7cb83405",
+          "document_id": "LRC-301",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 9,
+          "path": "LRC-301_master_treatment_plan_brennan_2026-02-23.txt",
+          "quote": "Nadia is a 29-year-old graduate student on medical leave from her master's program since January. She reports depressed mood most days since the fall, poor concentration, oversleeping, and panic attacks (about 4 a week) that started on public transit. Intake 02/20/2026: PHQ-9 = 19, GAD-7 = 16. PHQ-9 item 9 scored 1 (passive thoughts that she would be better off going to sleep and not waking, several days); no plan, no intent, no history of attempts. Safety plan completed 02/20 and a copy given to the client.",
+          "role": "administered",
+          "service": "group",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 19
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-02-20",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 14,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "PHQ-9: 19 (02/20 intake) -> 16 (03/03) -> 15 (03/10) -> 12 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "PHQ-9",
+            "score": 19
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-03",
+      "instrument": "GAD-7",
+      "assessment_ids": [],
+      "score": 15,
+      "status": "documented",
+      "administered_scores": [
+        15
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        15
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-03",
+          "digest": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b",
+          "document_id": "LRC-302",
+          "encounter": "LR-V4473",
+          "kind": "assessment",
+          "line": 11,
+          "path": "LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+          "quote": "GAD-7 total: 15",
+          "role": "administered",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "GAD-7",
+            "score": 15
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-03",
+          "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+          "document_id": "LRC-305",
+          "encounter": "LR-V4535",
+          "kind": "assessment",
+          "line": 11,
+          "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+          "quote": "For comparison: PHQ-9 was 15 on 03/10 and 17 on 03/03; GAD-7 was 15 on 03/03.",
+          "role": "retrospective",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "GAD-7",
+            "score": 15
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-03",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 15,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "GAD-7: 16 (02/20) -> 15 (03/03) -> 11 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "GAD-7",
+            "score": 15
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-03",
+      "instrument": "PHQ-9",
+      "assessment_ids": [],
+      "score": 17,
+      "status": "documented",
+      "administered_scores": [
+        17
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        16
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-03",
+          "digest": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b",
+          "document_id": "LRC-302",
+          "encounter": "LR-V4473",
+          "kind": "assessment",
+          "line": 10,
+          "path": "LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+          "quote": "PHQ-9 item scores: 1) 2  2) 2  3) 3  4) 2  5) 2  6) 2  7) 2  8) 1  9) 1  | Total 17",
+          "role": "administered",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 17
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-03",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 14,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "PHQ-9: 19 (02/20 intake) -> 16 (03/03) -> 15 (03/10) -> 12 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "PHQ-9",
+            "score": 16
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-10",
+      "instrument": "PHQ-9",
+      "assessment_ids": [],
+      "score": 15,
+      "status": "documented",
+      "administered_scores": [
+        15
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        15
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-10",
+          "digest": "f6d080b8d75a73b7e6e6c198c4ae4e1d9af2a7d84b3358152c3cf53f38b572f7",
+          "document_id": "LRC-304",
+          "encounter": "LR-V4503",
+          "kind": "assessment",
+          "line": 10,
+          "path": "LRC-304_individual_note_brennan_2026-03-10.txt",
+          "quote": "Nadia completed both morning walks and ate breakfast on four of seven days. She reported three panic attacks in the past week, all on the bus, and said she now plans her day around avoiding rush hour. Her PHQ-9 today was 15; the GAD-7 was not repeated this week. She denied any thoughts of death or suicide this week (item 9 = 0) and said the passive thoughts \"went away after the first week of walking.\"",
+          "role": "administered",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 15
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-10",
+          "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+          "document_id": "LRC-305",
+          "encounter": "LR-V4535",
+          "kind": "assessment",
+          "line": 11,
+          "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+          "quote": "For comparison: PHQ-9 was 15 on 03/10 and 17 on 03/03; GAD-7 was 15 on 03/03.",
+          "role": "retrospective",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 15
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-10",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 14,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "PHQ-9: 19 (02/20 intake) -> 16 (03/03) -> 15 (03/10) -> 12 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "PHQ-9",
+            "score": 15
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-17",
+      "instrument": "GAD-7",
+      "assessment_ids": [],
+      "score": 11,
+      "status": "documented",
+      "administered_scores": [
+        11
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        11
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-17",
+          "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+          "document_id": "LRC-305",
+          "encounter": "LR-V4535",
+          "kind": "assessment",
+          "line": 10,
+          "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+          "quote": "Measures (administered today): PHQ-9 = 12; GAD-7 = 11.",
+          "role": "administered",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "GAD-7",
+            "score": 11
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-17",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 15,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "GAD-7: 16 (02/20) -> 15 (03/03) -> 11 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "GAD-7",
+            "score": 11
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-17",
+      "instrument": "PHQ-9",
+      "assessment_ids": [],
+      "score": 12,
+      "status": "documented",
+      "administered_scores": [
+        12
+      ],
+      "draft_scores": [],
+      "retrospective_scores": [
+        12
+      ],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-17",
+          "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+          "document_id": "LRC-305",
+          "encounter": "LR-V4535",
+          "kind": "assessment",
+          "line": 10,
+          "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+          "quote": "Measures (administered today): PHQ-9 = 12; GAD-7 = 11.",
+          "role": "administered",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 12
+          }
+        },
+        {
+          "appointment": null,
+          "date": "2026-03-17",
+          "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+          "document_id": "LRC-308",
+          "encounter": null,
+          "kind": "assessment",
+          "line": 14,
+          "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+          "quote": "PHQ-9: 19 (02/20 intake) -> 16 (03/03) -> 15 (03/10) -> 12 (03/17)",
+          "role": "retrospective",
+          "service": "unknown",
+          "value": {
+            "instrument": "PHQ-9",
+            "score": 12
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "instrument": "GAD-7",
+      "assessment_ids": [],
+      "score": null,
+      "status": "unverified",
+      "administered_scores": [],
+      "draft_scores": [
+        9
+      ],
+      "retrospective_scores": [],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-24",
+          "digest": "888c640f22613ca29907d469c7e28879f505eef01b1020dfc9e074115606ed97",
+          "document_id": "LRC-307",
+          "encounter": "LR-V4562",
+          "kind": "assessment",
+          "line": 12,
+          "path": "LRC-307_individual_note_in_progress_brennan_2026-03-24.txt",
+          "quote": "Measures (today): PHQ-9 = 10; GAD-7 = 9.",
+          "role": "draft",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "GAD-7",
+            "score": 9
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "instrument": "PHQ-9",
+      "assessment_ids": [],
+      "score": null,
+      "status": "unverified",
+      "administered_scores": [],
+      "draft_scores": [
+        10
+      ],
+      "retrospective_scores": [],
+      "sources": [
+        {
+          "appointment": null,
+          "date": "2026-03-24",
+          "digest": "888c640f22613ca29907d469c7e28879f505eef01b1020dfc9e074115606ed97",
+          "document_id": "LRC-307",
+          "encounter": "LR-V4562",
+          "kind": "assessment",
+          "line": 12,
+          "path": "LRC-307_individual_note_in_progress_brennan_2026-03-24.txt",
+          "quote": "Measures (today): PHQ-9 = 10; GAD-7 = 9.",
+          "role": "draft",
+          "service": "individual",
+          "value": {
+            "assessment_id": null,
+            "instrument": "PHQ-9",
+            "score": 10
+          }
+        }
+      ]
+    }
+  ],
+  "observations": [
+    {
+      "appointment": null,
+      "date": "2026-03-03",
+      "digest": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b",
+      "document_id": "LRC-302",
+      "encounter": "LR-V4473",
+      "kind": "observation",
+      "line": 8,
+      "path": "LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+      "quote": "S: Nadia describes \"a heavy week.\" Slept 10-11 hours most days, skipped two meals a day, and left the house only for group. Three panic attacks since last Tuesday, two of them on the bus. She has not opened email from her program since February.",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-03",
+      "digest": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b",
+      "document_id": "LRC-302",
+      "encounter": "LR-V4473",
+      "kind": "observation",
+      "line": 10,
+      "path": "LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+      "quote": "PHQ-9 item scores: 1) 2  2) 2  3) 3  4) 2  5) 2  6) 2  7) 2  8) 1  9) 1  | Total 17",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-03",
+      "digest": "af769e7441f6e0bdd62971366accdfd012c61a4c58d89465aefd06c6812c077b",
+      "document_id": "LRC-302",
+      "encounter": "LR-V4473",
+      "kind": "observation",
+      "line": 13,
+      "path": "LRC-302_individual_soap_note_brennan_2026-03-03.txt",
+      "quote": "A: Depressive symptoms remain moderately severe. Item 9 = 1: passive thoughts of not waking up, \"a couple of days\"; denies plan or intent. Protective factors: her sister and her cat. Safety plan reviewed and updated with the campus crisis line. Low acute risk.",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-10",
+      "digest": "f6d080b8d75a73b7e6e6c198c4ae4e1d9af2a7d84b3358152c3cf53f38b572f7",
+      "document_id": "LRC-304",
+      "encounter": "LR-V4503",
+      "kind": "observation",
+      "line": 10,
+      "path": "LRC-304_individual_note_brennan_2026-03-10.txt",
+      "quote": "Nadia completed both morning walks and ate breakfast on four of seven days. She reported three panic attacks in the past week, all on the bus, and said she now plans her day around avoiding rush hour. Her PHQ-9 today was 15; the GAD-7 was not repeated this week. She denied any thoughts of death or suicide this week (item 9 = 0) and said the passive thoughts \"went away after the first week of walking.\"",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-17",
+      "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+      "document_id": "LRC-305",
+      "encounter": "LR-V4535",
+      "kind": "observation",
+      "line": 8,
+      "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+      "quote": "Interval history: Nadia missed group on 3/12. She had a panic attack on the bus on the way, went home, and called to cancel. She said she was angry with herself afterward but did the two-stops-past practice on Saturday instead, and it went \"better than I expected.\" One panic attack since last week (the 3/12 episode). Spoke with her sister twice.",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-17",
+      "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+      "document_id": "LRC-305",
+      "encounter": "LR-V4535",
+      "kind": "observation",
+      "line": 13,
+      "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+      "quote": "Mental status: Better grooming, more spontaneous speech, reactive affect. Denies SI (item 9 = 0).",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-17",
+      "digest": "a29402527145e9951b58628f1dc0091a698e122a92b62f6589fd9ab409e3d134",
+      "document_id": "LRC-305",
+      "encounter": "LR-V4535",
+      "kind": "observation",
+      "line": 14,
+      "path": "LRC-305_individual_progress_note_brennan_2026-03-17.txt",
+      "quote": "Assessment: Depressive and anxiety symptoms are lower than at the start of March. Bus avoidance persists, but she is approaching it with a plan.",
+      "role": "signed",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-19",
+      "digest": "d274d20c9b74ed4234fc51242914272c4f0f6acba4b7def346474881df820e30",
+      "document_id": "LRC-303",
+      "encounter": "LR-V4552",
+      "kind": "observation",
+      "line": 16,
+      "path": "LRC-303_process_group_member_notes_brennan_2026-03.txt",
+      "quote": "Nadia arrived at 1:30 PM, about half an hour after group started. She said she took the bus and got off one stop early to calm down, then walked the rest. Self-rated anxiety 6/10 on arrival. She described the walk as practice rather than escape, which the group reinforced. More engaged after the break; offered feedback to a newer member. Left at the 2:30 close.",
+      "role": "signed",
+      "service": "group",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-24",
+      "digest": "888c640f22613ca29907d469c7e28879f505eef01b1020dfc9e074115606ed97",
+      "document_id": "LRC-307",
+      "encounter": "LR-V4562",
+      "kind": "observation",
+      "line": 11,
+      "path": "LRC-307_individual_note_in_progress_brennan_2026-03-24.txt",
+      "quote": "Interval history: Nadia registered for one summer course (online statistics) after meeting with financial aid. No panic attacks since 3/12; rode the bus partway twice. Sleeping 8-9 hours.",
+      "role": "draft",
+      "service": "individual",
+      "value": "clinical narrative"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-26",
+      "digest": "d274d20c9b74ed4234fc51242914272c4f0f6acba4b7def346474881df820e30",
+      "document_id": "LRC-303",
+      "encounter": "LR-V4579",
+      "kind": "observation",
+      "line": 20,
+      "path": "LRC-303_process_group_member_notes_brennan_2026-03.txt",
+      "quote": "On time; present from 1:00 to 2:30. Nadia shared that she rode the bus the whole way without getting off. She talked about mixed feelings about going back to school and about her sister's encouragement. Mood brighter; laughed with peers.",
+      "role": "signed",
+      "service": "group",
+      "value": "clinical narrative"
+    }
+  ],
+  "focus_observations": [],
+  "retrospective_summaries": [
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 11,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "Summary: Nadia has met her weekly minimum in every week except the week of 3/9, when she missed group.",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 14,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "PHQ-9: 19 (02/20 intake) -> 16 (03/03) -> 15 (03/10) -> 12 (03/17)",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 15,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "GAD-7: 16 (02/20) -> 15 (03/03) -> 11 (03/17)",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 18,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "Progress toward goals",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 19,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "1. Mood: partial progress. PHQ-9 is down 7 points from intake and is in the moderate range.",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 20,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "2. Panic: partial progress; bus exposure continues.",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    },
+    {
+      "appointment": null,
+      "date": "2026-03-27",
+      "digest": "2f60d7f7043cb10730b71e7e44cd4194f812e02ea4f79797ffdfd34ec7bd9c45",
+      "document_id": "LRC-308",
+      "encounter": null,
+      "kind": "retrospective_summary",
+      "line": 23,
+      "path": "LRC-308_30day_plan_review_brennan_2026-03-27.txt",
+      "quote": "Plan: continue current services. Weekly minimum unchanged. Next review 04/27/2026.",
+      "role": "signed",
+      "service": "unknown",
+      "value": "later review"
+    }
+  ],
+  "issues": [
+    "2026-03-03 PHQ-9: a later reference disagrees with the direct assessment."
+  ]
+}

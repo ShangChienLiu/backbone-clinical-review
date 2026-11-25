@@ -1,0 +1,21 @@
+LINDEN RIDGE COUNSELING CENTER
+GROUP SIGN-IN SHEET (paper form - EHR downtime procedure)
+Form ID: LRC-202 | Visit: LR-V4471
+
+Group: Anxiety Skills (CBT), Tues/Thurs | Room 2C
+Date: Tue 3/3/2026 | Scheduled 9:30-11:00 AM
+Facilitator: Marcus Bell, LPC
+
+Client row (other members' rows redacted for release to this chart)
+Name: LINDQVIST, THEODORE
+DOB: 6/14/1988 | MRN: LR-58831
+Time In: 9:30 | Time Out: 11:00 | Present: [X] Yes  [ ] No
+
+Facilitator attestation
+I attest that the attendance recorded on this sheet is accurate.
+Marcus Bell, LPC - signed 3/3/2026, 11:20 AM
+
+Downtime remarks
+The EHR scheduling and attendance module was unavailable on 3/3 from about 7:00 AM to 1:00 PM. Attendance for this group was taken on paper. Time In and Time Out were filled in by the facilitator after group closed. Sheet to be scanned and attached to each attendee's chart once the system is restored.
+
+Scanned to chart: T. Varga, HIT - 3/3/2026, 2:05 PM

@@ -1,0 +1,955 @@
+{
+  "cases": 17,
+  "steps": 23,
+  "passed_steps": 23,
+  "failures": [],
+  "results": [
+    {
+      "id": "gem-a1-correction-then-stale-retransmission",
+      "line": 1,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "bounds": [
+          50,
+          50
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "bounds": [
+          50,
+          50
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a1-correction-then-stale-retransmission",
+      "line": 2,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a1-correction-then-stale-retransmission",
+      "line": 3,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a2-conflicting-notes-same-encounter",
+      "line": 4,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30,
+          45
+        ],
+        "bounds": [
+          30,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E201": [
+            30,
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30,
+          45
+        ],
+        "bounds": [
+          30,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E201": [
+            30,
+            45
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a3-exact-byte-duplicate-retry",
+      "line": 5,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a3-exact-byte-duplicate-retry",
+      "line": 6,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 0,
+        "duplicate_files": 1,
+        "encounters_recomputed": 0,
+        "weeks_recomputed": 0
+      }
+    },
+    {
+      "id": "gem-a4-same-day-distinct-visits",
+      "line": 7,
+      "pass": true,
+      "expected": {
+        "sessions": 2,
+        "days": 1,
+        "minutes": [
+          95
+        ],
+        "bounds": [
+          95,
+          95
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E401": [
+            45
+          ],
+          "ZZ-E402": [
+            50
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 2,
+        "days": 1,
+        "minutes": [
+          95
+        ],
+        "bounds": [
+          95,
+          95
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E401": [
+            45
+          ],
+          "ZZ-E402": [
+            50
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 2,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a5-plan-under-target-then-complete-register",
+      "line": 8,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": false
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": false
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a5-plan-under-target-then-complete-register",
+      "line": 9,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "not met",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": true
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "not met",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": true
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 0,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gem-a6-exceeds-goal-with-incomplete-coverage",
+      "line": 10,
+      "pass": true,
+      "expected": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          95
+        ],
+        "bounds": [
+          95,
+          95
+        ],
+        "goal": "met",
+        "encounters": {
+          "ZZ-E601": [
+            45
+          ],
+          "ZZ-E602": [
+            50
+          ]
+        },
+        "complete": false
+      },
+      "actual": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          95
+        ],
+        "bounds": [
+          95,
+          95
+        ],
+        "goal": "met",
+        "encounters": {
+          "ZZ-E601": [
+            45
+          ],
+          "ZZ-E602": [
+            50
+          ]
+        },
+        "complete": false
+      },
+      "work": {
+        "new_documents": 3,
+        "duplicate_files": 0,
+        "encounters_recomputed": 2,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "cla-b1",
+      "line": 11,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q101",
+            12
+          ],
+          [
+            "ZZ-Q102",
+            8
+          ]
+        ],
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q101",
+            12
+          ],
+          [
+            "ZZ-Q102",
+            8
+          ]
+        ],
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 3,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "cla-b2",
+      "line": 12,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "cla-b2",
+      "line": 13,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 0,
+        "weeks_recomputed": 0
+      }
+    },
+    {
+      "id": "oss-telehealth-split",
+      "line": 14,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          35
+        ],
+        "encounters": {
+          "ZZ-E200": [
+            35
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          35
+        ],
+        "encounters": {
+          "ZZ-E200": [
+            35
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "oss-no-show-overrule",
+      "line": 15,
+      "pass": true,
+      "expected": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            0
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            0
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "oss-family-visit-short",
+      "line": 16,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "encounters": {
+          "ZZ-E202": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "encounters": {
+          "ZZ-E202": [
+            30
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "oss-overlap-encounters",
+      "line": 17,
+      "pass": true,
+      "expected": {
+        "sessions": 2,
+        "days": 1,
+        "minutes": [
+          75
+        ],
+        "encounters": {
+          "ZZ-E203": [
+            45
+          ],
+          "ZZ-E204": [
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 2,
+        "days": 1,
+        "minutes": [
+          75
+        ],
+        "encounters": {
+          "ZZ-E203": [
+            45
+          ],
+          "ZZ-E204": [
+            45
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 2,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-prose-clock",
+      "line": 18,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          40
+        ]
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          40
+        ]
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-clock-unknown",
+      "line": 19,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [],
+        "bounds": [
+          0,
+          null
+        ]
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [],
+        "bounds": [
+          0,
+          null
+        ]
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-group-break",
+      "line": 20,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "encounters": {
+          "ZZ-E902": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "encounters": {
+          "ZZ-E902": [
+            30
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-unsigned-amendment",
+      "line": 21,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ]
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ]
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-unsigned-amendment",
+      "line": 22,
+      "pass": true,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ]
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ]
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gpt-ineligible-medication",
+      "line": 23,
+      "pass": true,
+      "expected": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "encounters": {
+          "ZZ-E906": [
+            0
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "encounters": {
+          "ZZ-E906": [
+            0
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 1,
+        "duplicate_files": 0,
+        "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    }
+  ]
+}

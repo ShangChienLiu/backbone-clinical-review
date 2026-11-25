@@ -1,0 +1,19 @@
+{
+  "files": 31,
+  "new_documents": 31,
+  "duplicate_files": 0,
+  "cached_files": 0,
+  "claims_added": 162,
+  "patient_replays": 1,
+  "encounters_recomputed": 20,
+  "encounters_removed": 0,
+  "weeks_recomputed": 4,
+  "extraction_seconds": 0.030496751045575365,
+  "reconciliation_seconds": 0.003732167009729892,
+  "model_calls": 0,
+  "model_tokens": 0,
+  "model_api_cost_usd": 0,
+  "errors": [],
+  "warnings": [],
+  "elapsed_seconds": 0.0380151669960469
+}

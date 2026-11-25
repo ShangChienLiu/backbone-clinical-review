@@ -1,0 +1,23 @@
+LINDEN RIDGE COUNSELING CENTER
+INDIVIDUAL PSYCHOTHERAPY - VIDEO VISIT
+Note ID: LRC-206 | Visit: LR-V4495 | Appointment: APPT-30915
+Client: Theo Lindqvist | DOB 06/14/1988 | MRN LR-58831
+Date: Monday, March 9, 2026 | Clinician: Priya Raman, LMFT (at Linden Ridge office); client at home
+Consent for telehealth on file (02/16/2026).
+
+Theo joined the call at 3:00 PM. At 3:22 PM his home internet dropped and the video froze; there was no audio or video contact while he was disconnected. He rejoined the same appointment link at 3:31 PM and we continued until 3:58 PM. This was one session under the original appointment. Client contact time: 3:00-3:22 PM and 3:31-3:58 PM.
+
+Subjective: Theo said last week "fell apart." His bus was late Tuesday and he got to group late. On Thursday he had a panic attack at the bus stop and went home. He cancelled Friday's session that morning. He reported 4 panic attacks in the past week and is sleeping 4-5 hours a night.
+Measures today: PHQ-9 16, GAD-7 17 (administered by screen share, scored in session).
+Intervention: Reviewed the panic cycle using last Thursday's episode as the example. Normalized setbacks early in exposure work. After he reconnected, we weighed the costs and benefits of increasing treatment intensity; Theo agreed to meet this week about a plan update, including adding his wife to some sessions.
+Safety: Denies SI/HI. No safety concerns.
+Plan: Group 3/10 and 3/12. Raman to consult with Dr. Achebe about medication options. Plan review moved up.
+
+Electronically signed: Priya Raman, LMFT - 03/09/2026 5:12 PM
+
+--- Attached: video platform participant log (exported 03/09/2026 4:20 PM; local time) ---
+Meeting ID | Participant | Joined | Left | Minutes
+APPT-30915 | Priya Raman (host) | 2:58 PM | 3:59 PM | 61
+APPT-30915 | theo.lindqvist | 3:00 PM | 3:22 PM | 22
+APPT-30915 | theo.lindqvist | 3:31 PM | 3:58 PM | 27
+Log note: participant rejoined under the same meeting ID.

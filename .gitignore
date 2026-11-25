@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+reproduced/
+verified-run/
+full-run/
+.backbone/
+.DS_Store
+clinical.sqlite
+review.sqlite
+collection.sqlite

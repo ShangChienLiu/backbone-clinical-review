@@ -1,0 +1,11 @@
+test_conflicting_duration_has_witnesses_on_both_sides (test_incremental_certainty.SavedReviewTest.test_conflicting_duration_has_witnesses_on_both_sides) ... ok
+test_episode_dates_do_not_attest_complete_attendance (test_incremental_certainty.SavedReviewTest.test_episode_dates_do_not_attest_complete_attendance) ... ok
+test_joint_timing_and_date_prove_a_shortfall (test_incremental_certainty.SavedReviewTest.test_joint_timing_and_date_prove_a_shortfall) ... ok
+test_one_amendment_recomputes_one_encounter_and_one_week (test_incremental_certainty.SavedReviewTest.test_one_amendment_recomputes_one_encounter_and_one_week) ... ok
+test_compressed_states_match_independent_exhaustive_oracle (test_incremental_certainty.ScenarioOracleTest.test_compressed_states_match_independent_exhaustive_oracle) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.053s
+
+OK
+Review and benchmark outputs saved in /tmp/backbone-validated-run.GCFFmv

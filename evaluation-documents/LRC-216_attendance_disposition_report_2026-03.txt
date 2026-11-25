@@ -1,0 +1,25 @@
+LINDEN RIDGE COUNSELING CENTER
+ATTENDANCE AND APPOINTMENT DISPOSITION REPORT
+Report ID: LRC-216 | Run 03/30/2026 8:15 AM | Source: EHR scheduling and group attendance module
+Client: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831 | Period 03/01/2026-03/31/2026
+
+How to read this report: group rows show the client's actual Time In and Time Out as entered and signed by the facilitator in the attendance module. Individual, family, collateral, and medication rows show the appointment disposition only; contact times for those visits are in the provider's note. "Booked" is the scheduled slot, not time attended.
+
+DOS | Visit | Service | Booked | Time In | Time Out | Disposition | Signed by / when
+03/03 | LR-V4471 | Anxiety Skills group | 09:30-11:00 | see paper sheet | see paper sheet | Attended (paper sign-in, EHR downtime) | M. Bell 03/03 (paper)
+03/05 | LR-V4488 | Anxiety Skills group | 09:30-11:00 | - | - | No-show, did not attend | M. Bell 03/05 11:12
+03/06 | LR-V4490 | Individual psychotherapy | 15:00-15:50 | n/a | n/a | Cancelled by client (phoned 03/06 07:40) | Front desk, J. Pike 03/06 07:44
+03/09 | LR-V4495 | Individual psychotherapy (video) | 15:00-15:50 | n/a | n/a | Kept | P. Raman 03/09
+03/10 | LR-V4502 | Anxiety Skills group | 09:30-11:00 | 09:30 | 11:00 | Attended | M. Bell 03/10 11:05
+03/11 | LR-V4509 | Collateral contact (client not present) | 12:00-12:30 | n/a | n/a | Completed | P. Raman 03/11
+03/12 | LR-V4519 | Anxiety Skills group | 09:30-11:00 | 09:30 | 11:00 | Attended | M. Bell 03/12 11:03
+03/16 | LR-V4533 | Individual psychotherapy | 14:00-14:50 | n/a | n/a | Kept | P. Raman 03/16
+03/17 | LR-V4540 | Anxiety Skills group | 09:30-11:00 | 09:28 | 11:00 | Attended | M. Bell 03/17 11:04
+03/17 | LR-V4544 | Family psychotherapy | 16:00-17:00 | n/a | n/a | Kept | P. Raman 03/17
+03/19 | LR-V4551 | Anxiety Skills group | 09:30-11:00 | - | - | Cancelled by program (facilitator ill) | M. Bell 03/20 08:02
+03/23 | LR-V4560 | Individual psychotherapy | 14:00-14:50 | n/a | n/a | Kept | P. Raman 03/23
+03/24 | LR-V4566 | Anxiety Skills group | 09:30-11:00 | 09:30 | 10:45 | Attended, left early (job interview) | M. Bell 03/24 11:02
+03/25 | LR-V4571 | Medication evaluation | 10:00-10:30 | n/a | n/a | Kept | R. Holloway 03/25
+03/26 | LR-V4578 | Anxiety Skills group | 09:30-11:00 | 09:30 | 11:00 | Attended | M. Bell 03/26 11:06
+
+End of report. 15 rows.

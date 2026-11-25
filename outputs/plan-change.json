@@ -1,0 +1,742 @@
+{
+  "patient_id": "LR-58831",
+  "changes": [
+    {
+      "effective_date": "2026-03-16",
+      "previous_plan": {
+        "appointment": null,
+        "date": "2026-02-16",
+        "digest": "b146a81ff4db6f2afba3ad3b991667586d204cb1542e9f0e217ac9d3b8aafd50",
+        "document_id": "LRC-201",
+        "encounter": null,
+        "kind": "plan",
+        "line": 33,
+        "path": "LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt",
+        "quote": "Each week (Monday through Sunday), Theo will attend therapy on at least 2 separate days and receive at least 120 minutes of therapy in total. Counted time is time Theo is actually present in an individual, group, or family psychotherapy session. Group break time does not count. Medication visits and staff consultations held without Theo are tracked separately and do not count toward this goal.",
+        "role": "plan",
+        "service": "unknown",
+        "value": {
+          "days": 2,
+          "minutes": 120.0
+        }
+      },
+      "new_plan": {
+        "appointment": null,
+        "date": "2026-03-16",
+        "digest": "653bf19f70a346544c0ec049ee4dd4499926d4b15ff9e16b1b67f17f1b2970f6",
+        "document_id": "LRC-208",
+        "encounter": null,
+        "kind": "plan",
+        "line": 19,
+        "path": "LRC-208_treatment_plan_update_2026-03-12.txt",
+        "quote": "Theo will receive therapy on at least 3 separate days each week, for a total of at least 180 minutes of therapy each week. Only time Theo is present in individual, group, or family psychotherapy counts; group breaks do not count.",
+        "role": "plan",
+        "service": "unknown",
+        "value": {
+          "days": 3,
+          "minutes": 180.0
+        }
+      },
+      "before": {
+        "window": [
+          "2026-03-02",
+          "2026-03-15"
+        ],
+        "total": {
+          "sessions_confirmed": 4,
+          "sessions_possible_additional": 0,
+          "days_confirmed": 4,
+          "days_possible_upper": 4,
+          "minute_min": 249,
+          "minute_max": 249,
+          "minute_values": [
+            249
+          ],
+          "hour_min": 4.15,
+          "hour_max": 4.15,
+          "by_service": {
+            "group": {
+              "confirmed": 3,
+              "unresolved": 0,
+              "minute_min": 200,
+              "minute_max": 200
+            },
+            "individual": {
+              "confirmed": 1,
+              "unresolved": 0,
+              "minute_min": 49,
+              "minute_max": 49
+            }
+          }
+        },
+        "weeks": [
+          {
+            "by_service": {
+              "group": {
+                "confirmed": 1,
+                "minute_max": 50,
+                "minute_min": 50,
+                "unresolved": 0
+              }
+            },
+            "certainty": {
+              "algorithm_version": 2,
+              "bounds": {
+                "days": [
+                  1,
+                  1
+                ],
+                "minutes": [
+                  50,
+                  50
+                ]
+              },
+              "complete": true,
+              "coverage_source": {
+                "document_id": "LRC-216",
+                "line": 4,
+                "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+              },
+              "fail_possible": true,
+              "method": "exhaustive upper bounds",
+              "pass_possible": false,
+              "plan_source": {
+                "document_id": "LRC-201",
+                "line": 33,
+                "path": "LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt"
+              },
+              "target": {
+                "days": 2,
+                "minutes": 120.0
+              },
+              "witnesses": {}
+            },
+            "complete_week_claimed": true,
+            "coverage": {
+              "appointment": null,
+              "date": "2026-03-01",
+              "digest": "1098317a7a368a8fbc39beb5f205260b8397c291e8f743f3a51acccb0112becd",
+              "document_id": "LRC-216",
+              "encounter": null,
+              "kind": "coverage",
+              "line": 4,
+              "path": "LRC-216_attendance_disposition_report_2026-03.txt",
+              "quote": "Client: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831 | Period 03/01/2026-03/31/2026",
+              "role": "roster",
+              "service": "coordination",
+              "value": [
+                "2026-03-01",
+                "2026-03-31"
+              ]
+            },
+            "days_confirmed": 1,
+            "days_possible_upper": 1,
+            "episode_scope": null,
+            "events": [
+              "LR-V4471",
+              "LR-V4488",
+              "LR-V4490"
+            ],
+            "goal_status": "not met",
+            "hour_max": 0.8333333333333334,
+            "hour_min": 0.8333333333333334,
+            "limitations": [],
+            "midweek_plan_changes": [],
+            "minute_max": 50,
+            "minute_min": 50,
+            "minute_values": [
+              50
+            ],
+            "monday": "2026-03-02",
+            "plan": {
+              "appointment": null,
+              "date": "2026-02-16",
+              "digest": "b146a81ff4db6f2afba3ad3b991667586d204cb1542e9f0e217ac9d3b8aafd50",
+              "document_id": "LRC-201",
+              "encounter": null,
+              "kind": "plan",
+              "line": 33,
+              "path": "LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt",
+              "quote": "Each week (Monday through Sunday), Theo will attend therapy on at least 2 separate days and receive at least 120 minutes of therapy in total. Counted time is time Theo is actually present in an individual, group, or family psychotherapy session. Group break time does not count. Medication visits and staff consultations held without Theo are tracked separately and do not count toward this goal.",
+              "role": "plan",
+              "service": "unknown",
+              "value": {
+                "days": 2,
+                "minutes": 120.0
+              }
+            },
+            "review_end": "2026-03-08",
+            "review_start": "2026-03-02",
+            "sessions_confirmed": 1,
+            "sessions_possible_additional": 0,
+            "sunday": "2026-03-08"
+          },
+          {
+            "by_service": {
+              "group": {
+                "confirmed": 2,
+                "minute_max": 150,
+                "minute_min": 150,
+                "unresolved": 0
+              },
+              "individual": {
+                "confirmed": 1,
+                "minute_max": 49,
+                "minute_min": 49,
+                "unresolved": 0
+              }
+            },
+            "certainty": {
+              "algorithm_version": 2,
+              "bounds": {
+                "days": [
+                  3,
+                  3
+                ],
+                "minutes": [
+                  199,
+                  199
+                ]
+              },
+              "complete": true,
+              "coverage_source": {
+                "document_id": "LRC-216",
+                "line": 4,
+                "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+              },
+              "fail_possible": false,
+              "method": "guaranteed lower bounds",
+              "pass_possible": true,
+              "plan_source": {
+                "document_id": "LRC-201",
+                "line": 33,
+                "path": "LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt"
+              },
+              "target": {
+                "days": 2,
+                "minutes": 120.0
+              },
+              "witnesses": {}
+            },
+            "complete_week_claimed": true,
+            "coverage": {
+              "appointment": null,
+              "date": "2026-03-01",
+              "digest": "1098317a7a368a8fbc39beb5f205260b8397c291e8f743f3a51acccb0112becd",
+              "document_id": "LRC-216",
+              "encounter": null,
+              "kind": "coverage",
+              "line": 4,
+              "path": "LRC-216_attendance_disposition_report_2026-03.txt",
+              "quote": "Client: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831 | Period 03/01/2026-03/31/2026",
+              "role": "roster",
+              "service": "coordination",
+              "value": [
+                "2026-03-01",
+                "2026-03-31"
+              ]
+            },
+            "days_confirmed": 3,
+            "days_possible_upper": 3,
+            "episode_scope": null,
+            "events": [
+              "LR-V4495",
+              "LR-V4502",
+              "LR-V4509",
+              "LR-V4519"
+            ],
+            "goal_status": "met",
+            "hour_max": 3.316666666666667,
+            "hour_min": 3.316666666666667,
+            "limitations": [],
+            "midweek_plan_changes": [],
+            "minute_max": 199,
+            "minute_min": 199,
+            "minute_values": [
+              199
+            ],
+            "monday": "2026-03-09",
+            "plan": {
+              "appointment": null,
+              "date": "2026-02-16",
+              "digest": "b146a81ff4db6f2afba3ad3b991667586d204cb1542e9f0e217ac9d3b8aafd50",
+              "document_id": "LRC-201",
+              "encounter": null,
+              "kind": "plan",
+              "line": 33,
+              "path": "LRC-201_treatment_plan_initial_lindqvist_2026-02-16.txt",
+              "quote": "Each week (Monday through Sunday), Theo will attend therapy on at least 2 separate days and receive at least 120 minutes of therapy in total. Counted time is time Theo is actually present in an individual, group, or family psychotherapy session. Group break time does not count. Medication visits and staff consultations held without Theo are tracked separately and do not count toward this goal.",
+              "role": "plan",
+              "service": "unknown",
+              "value": {
+                "days": 2,
+                "minutes": 120.0
+              }
+            },
+            "review_end": "2026-03-15",
+            "review_start": "2026-03-09",
+            "sessions_confirmed": 3,
+            "sessions_possible_additional": 0,
+            "sunday": "2026-03-15"
+          }
+        ]
+      },
+      "after": {
+        "window": [
+          "2026-03-16",
+          "2026-03-29"
+        ],
+        "total": {
+          "sessions_confirmed": 6,
+          "sessions_possible_additional": 0,
+          "days_confirmed": 5,
+          "days_possible_upper": 5,
+          "minute_min": 325,
+          "minute_max": 345,
+          "minute_values": [
+            325,
+            345
+          ],
+          "hour_min": 5.416666666666667,
+          "hour_max": 5.75,
+          "by_service": {
+            "family": {
+              "confirmed": 1,
+              "unresolved": 0,
+              "minute_min": 35,
+              "minute_max": 35
+            },
+            "group": {
+              "confirmed": 3,
+              "unresolved": 0,
+              "minute_min": 210,
+              "minute_max": 210
+            },
+            "individual": {
+              "confirmed": 2,
+              "unresolved": 0,
+              "minute_min": 80,
+              "minute_max": 100
+            }
+          }
+        },
+        "weeks": [
+          {
+            "by_service": {
+              "family": {
+                "confirmed": 1,
+                "minute_max": 35,
+                "minute_min": 35,
+                "unresolved": 0
+              },
+              "group": {
+                "confirmed": 1,
+                "minute_max": 75,
+                "minute_min": 75,
+                "unresolved": 0
+              },
+              "individual": {
+                "confirmed": 1,
+                "minute_max": 50,
+                "minute_min": 50,
+                "unresolved": 0
+              }
+            },
+            "certainty": {
+              "algorithm_version": 2,
+              "bounds": {
+                "days": [
+                  2,
+                  2
+                ],
+                "minutes": [
+                  160,
+                  160
+                ]
+              },
+              "complete": true,
+              "coverage_source": {
+                "document_id": "LRC-216",
+                "line": 4,
+                "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+              },
+              "fail_possible": true,
+              "method": "exhaustive upper bounds",
+              "pass_possible": false,
+              "plan_source": {
+                "document_id": "LRC-208",
+                "line": 19,
+                "path": "LRC-208_treatment_plan_update_2026-03-12.txt"
+              },
+              "target": {
+                "days": 3,
+                "minutes": 180.0
+              },
+              "witnesses": {}
+            },
+            "complete_week_claimed": true,
+            "coverage": {
+              "appointment": null,
+              "date": "2026-03-01",
+              "digest": "1098317a7a368a8fbc39beb5f205260b8397c291e8f743f3a51acccb0112becd",
+              "document_id": "LRC-216",
+              "encounter": null,
+              "kind": "coverage",
+              "line": 4,
+              "path": "LRC-216_attendance_disposition_report_2026-03.txt",
+              "quote": "Client: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831 | Period 03/01/2026-03/31/2026",
+              "role": "roster",
+              "service": "coordination",
+              "value": [
+                "2026-03-01",
+                "2026-03-31"
+              ]
+            },
+            "days_confirmed": 2,
+            "days_possible_upper": 2,
+            "episode_scope": null,
+            "events": [
+              "LR-V4533",
+              "LR-V4540",
+              "LR-V4544",
+              "LR-V4551"
+            ],
+            "goal_status": "not met",
+            "hour_max": 2.6666666666666665,
+            "hour_min": 2.6666666666666665,
+            "limitations": [],
+            "midweek_plan_changes": [],
+            "minute_max": 160,
+            "minute_min": 160,
+            "minute_values": [
+              160
+            ],
+            "monday": "2026-03-16",
+            "plan": {
+              "appointment": null,
+              "date": "2026-03-16",
+              "digest": "653bf19f70a346544c0ec049ee4dd4499926d4b15ff9e16b1b67f17f1b2970f6",
+              "document_id": "LRC-208",
+              "encounter": null,
+              "kind": "plan",
+              "line": 19,
+              "path": "LRC-208_treatment_plan_update_2026-03-12.txt",
+              "quote": "Theo will receive therapy on at least 3 separate days each week, for a total of at least 180 minutes of therapy each week. Only time Theo is present in individual, group, or family psychotherapy counts; group breaks do not count.",
+              "role": "plan",
+              "service": "unknown",
+              "value": {
+                "days": 3,
+                "minutes": 180.0
+              }
+            },
+            "review_end": "2026-03-22",
+            "review_start": "2026-03-16",
+            "sessions_confirmed": 3,
+            "sessions_possible_additional": 0,
+            "sunday": "2026-03-22"
+          },
+          {
+            "by_service": {
+              "group": {
+                "confirmed": 2,
+                "minute_max": 135,
+                "minute_min": 135,
+                "unresolved": 0
+              },
+              "individual": {
+                "confirmed": 1,
+                "minute_max": 50,
+                "minute_min": 30,
+                "unresolved": 0
+              }
+            },
+            "certainty": {
+              "algorithm_version": 2,
+              "bounds": {
+                "days": [
+                  3,
+                  3
+                ],
+                "minutes": [
+                  165,
+                  185
+                ]
+              },
+              "complete": true,
+              "coverage_source": {
+                "document_id": "LRC-216",
+                "line": 4,
+                "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+              },
+              "fail_possible": true,
+              "method": "joint scenarios",
+              "pass_possible": true,
+              "plan_source": {
+                "document_id": "LRC-208",
+                "line": 19,
+                "path": "LRC-208_treatment_plan_update_2026-03-12.txt"
+              },
+              "target": {
+                "days": 3,
+                "minutes": 180.0
+              },
+              "witnesses": {
+                "fail": {
+                  "days": 3,
+                  "events": [
+                    {
+                      "date": "2026-03-23",
+                      "event": "LR-V4560",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-213",
+                          "line": 8,
+                          "path": "LRC-213_consulting_psychologist_note_2026-03-23.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          860,
+                          890
+                        ]
+                      ]
+                    },
+                    {
+                      "date": "2026-03-24",
+                      "event": "LR-V4566",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-204",
+                          "line": 6,
+                          "path": "LRC-204_group_progress_notes_2026-03-03_10_12.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 5,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 16,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-216",
+                          "line": 21,
+                          "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          570,
+                          615
+                        ],
+                        [
+                          630,
+                          645
+                        ]
+                      ]
+                    },
+                    {
+                      "date": "2026-03-26",
+                      "event": "LR-V4578",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-204",
+                          "line": 6,
+                          "path": "LRC-204_group_progress_notes_2026-03-03_10_12.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 5,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 20,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-216",
+                          "line": 23,
+                          "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          570,
+                          615
+                        ],
+                        [
+                          630,
+                          660
+                        ]
+                      ]
+                    }
+                  ],
+                  "minutes": 165
+                },
+                "pass": {
+                  "days": 3,
+                  "events": [
+                    {
+                      "date": "2026-03-23",
+                      "event": "LR-V4560",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-212",
+                          "line": 8,
+                          "path": "LRC-212_individual_session_raman_2026-03-23.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          840,
+                          890
+                        ]
+                      ]
+                    },
+                    {
+                      "date": "2026-03-24",
+                      "event": "LR-V4566",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-204",
+                          "line": 6,
+                          "path": "LRC-204_group_progress_notes_2026-03-03_10_12.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 5,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 16,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-216",
+                          "line": 21,
+                          "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          570,
+                          615
+                        ],
+                        [
+                          630,
+                          645
+                        ]
+                      ]
+                    },
+                    {
+                      "date": "2026-03-26",
+                      "event": "LR-V4578",
+                      "evidence": [
+                        {
+                          "document_id": "LRC-204",
+                          "line": 6,
+                          "path": "LRC-204_group_progress_notes_2026-03-03_10_12.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 5,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-210",
+                          "line": 20,
+                          "path": "LRC-210_group_note_batch_2026-03-17_19_24_26.txt"
+                        },
+                        {
+                          "document_id": "LRC-216",
+                          "line": 23,
+                          "path": "LRC-216_attendance_disposition_report_2026-03.txt"
+                        }
+                      ],
+                      "intervals": [
+                        [
+                          570,
+                          615
+                        ],
+                        [
+                          630,
+                          660
+                        ]
+                      ]
+                    }
+                  ],
+                  "minutes": 185
+                }
+              }
+            },
+            "complete_week_claimed": true,
+            "coverage": {
+              "appointment": null,
+              "date": "2026-03-01",
+              "digest": "1098317a7a368a8fbc39beb5f205260b8397c291e8f743f3a51acccb0112becd",
+              "document_id": "LRC-216",
+              "encounter": null,
+              "kind": "coverage",
+              "line": 4,
+              "path": "LRC-216_attendance_disposition_report_2026-03.txt",
+              "quote": "Client: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831 | Period 03/01/2026-03/31/2026",
+              "role": "roster",
+              "service": "coordination",
+              "value": [
+                "2026-03-01",
+                "2026-03-31"
+              ]
+            },
+            "days_confirmed": 3,
+            "days_possible_upper": 3,
+            "episode_scope": null,
+            "events": [
+              "LR-V4560",
+              "LR-V4566",
+              "LR-V4571",
+              "LR-V4578"
+            ],
+            "goal_status": "cannot determine",
+            "hour_max": 3.0833333333333335,
+            "hour_min": 2.75,
+            "limitations": [],
+            "midweek_plan_changes": [],
+            "minute_max": 185,
+            "minute_min": 165,
+            "minute_values": [
+              165,
+              185
+            ],
+            "monday": "2026-03-23",
+            "plan": {
+              "appointment": null,
+              "date": "2026-03-16",
+              "digest": "653bf19f70a346544c0ec049ee4dd4499926d4b15ff9e16b1b67f17f1b2970f6",
+              "document_id": "LRC-208",
+              "encounter": null,
+              "kind": "plan",
+              "line": 19,
+              "path": "LRC-208_treatment_plan_update_2026-03-12.txt",
+              "quote": "Theo will receive therapy on at least 3 separate days each week, for a total of at least 180 minutes of therapy each week. Only time Theo is present in individual, group, or family psychotherapy counts; group breaks do not count.",
+              "role": "plan",
+              "service": "unknown",
+              "value": {
+                "days": 3,
+                "minutes": 180.0
+              }
+            },
+            "review_end": "2026-03-29",
+            "review_start": "2026-03-23",
+            "sessions_confirmed": 3,
+            "sessions_possible_additional": 0,
+            "sunday": "2026-03-29"
+          }
+        ]
+      }
+    }
+  ]
+}

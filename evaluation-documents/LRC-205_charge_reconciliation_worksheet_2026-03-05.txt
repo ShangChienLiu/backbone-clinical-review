@@ -1,0 +1,24 @@
+Record ID: LRC-205
+LINDEN RIDGE COUNSELING CENTER - REVENUE CYCLE
+CHARGE RECONCILIATION WORKSHEET
+Prepared 03/27/2026, 3:40 PM by Tomas Varga, HIT (claim-hold review)
+
+Patient: LINDQVIST, THEODORE | DOB 06/14/1988 | MRN LR-58831
+Date of service: Thursday 03/05/2026
+Visit: LR-V4488 | Anxiety Skills (CBT) group | Booked 9:30-11:00 AM
+
+Item 1 - Clinical note attached to visit
+Note type: Group progress note (recurring-group template)
+Created: 03/05/2026 6:00 AM by SYSTEM (nightly note pre-population)
+Note status: DRAFT - NOT SIGNED
+Text as stored: "Client attended group and participated actively in today's skills practice. Client was receptive to feedback. Continue per treatment plan."
+Author signature: none | Co-signature: none
+Last modified: 03/05/2026 6:00 AM (SYSTEM)
+
+Item 2 - Charge
+Charge line: CL-90217 | CPT 90853 (group psychotherapy) | Units: 1 | Amount: $85.00
+Posted: 03/05/2026 11:58 PM (nightly batch, generated from the booked recurring appointment)
+Claim status: Held - supporting note unsigned
+
+Worksheet remarks
+This charge was posted automatically from the recurring group booking, not from a completed attendance entry. The only note on the visit is the system-created draft shown above; no clinician has edited or signed it. Clinical attendance for group visits is recorded in the attendance module. This worksheet makes no attendance determination; it has been routed to the group facilitator and the billing supervisor for review.

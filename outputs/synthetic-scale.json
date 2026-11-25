@@ -1,0 +1,41 @@
+[
+  {
+    "synthetic": true,
+    "patients": 20,
+    "files": 250,
+    "unique_documents": 240,
+    "cold_ingest_ms": 211.175,
+    "cold_extraction_ms": 158.317,
+    "cold_replay_ms": 32.038,
+    "cached_full_tree_rescan_ms": 8.633,
+    "single_patient_median_ms": 0.279,
+    "collection_query_ms": 5.835,
+    "sqlite_bytes": 3309568
+  },
+  {
+    "synthetic": true,
+    "patients": 100,
+    "files": 1250,
+    "unique_documents": 1200,
+    "cold_ingest_ms": 1021.276,
+    "cold_extraction_ms": 765.386,
+    "cold_replay_ms": 156.269,
+    "cached_full_tree_rescan_ms": 43.954,
+    "single_patient_median_ms": 0.282,
+    "collection_query_ms": 28.208,
+    "sqlite_bytes": 16269312
+  },
+  {
+    "synthetic": true,
+    "patients": 500,
+    "files": 6250,
+    "unique_documents": 6000,
+    "cold_ingest_ms": 5071.119,
+    "cold_extraction_ms": 3821.65,
+    "cold_replay_ms": 765.077,
+    "cached_full_tree_rescan_ms": 231.238,
+    "single_patient_median_ms": 0.297,
+    "collection_query_ms": 148.643,
+    "sqlite_bytes": 81047552
+  }
+]

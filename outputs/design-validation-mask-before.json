@@ -1,0 +1,10 @@
+{
+  "possible_combinations": 16384,
+  "expected": "not met",
+  "independent_bounds": "cannot determine",
+  "actual": "cannot determine",
+  "proof_method": "joint scenario search limit",
+  "oracle_ms_single_run": 109.445,
+  "solver_median_ms_25_runs": 8.345,
+  "witnesses": {}
+}

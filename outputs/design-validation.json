@@ -1,0 +1,241 @@
+{
+  "seed": 20261125,
+  "python": "3.14.6",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "exactness": {
+    "mixed": {
+      "trials": 400,
+      "oracle_met": 97,
+      "bounds_correct": 400,
+      "joint_correct": 400,
+      "extra_decisive": 0,
+      "incorrect_definite": 0,
+      "witnesses_checked": 394,
+      "oracle_not met": 106,
+      "oracle_cannot determine": 197,
+      "methods": {
+        "guaranteed lower bounds": 97,
+        "exhaustive upper bounds": 106,
+        "joint scenarios": 197
+      }
+    },
+    "correlated_shortfall": {
+      "trials": 120,
+      "oracle_not met": 120,
+      "bounds_correct": 0,
+      "joint_correct": 120,
+      "extra_decisive": 120,
+      "incorrect_definite": 0,
+      "witnesses_checked": 120,
+      "methods": {
+        "joint scenarios": 120
+      }
+    },
+    "true_boundary": {
+      "trials": 120,
+      "oracle_cannot determine": 120,
+      "bounds_correct": 120,
+      "joint_correct": 120,
+      "extra_decisive": 0,
+      "incorrect_definite": 0,
+      "witnesses_checked": 240,
+      "methods": {
+        "joint scenarios": 120
+      }
+    }
+  },
+  "compression": {
+    "possible_combinations": 131072,
+    "expected": "cannot determine",
+    "exhaustive_ms_single_run": 3612.192,
+    "joint_median_ms_25_runs": 0.058
+  },
+  "withholding": {
+    "trials": 120,
+    "assumed_complete_false_definite": 40,
+    "guarded_false_definite": 0,
+    "guarded_unresolved": 80,
+    "guarded_retained_met": 40
+  },
+  "active_mask": {
+    "possible_combinations": 16384,
+    "expected": "not met",
+    "independent_bounds": "cannot determine",
+    "actual": "not met",
+    "proof_method": "joint scenarios",
+    "oracle_ms_single_run": 106.246,
+    "solver_median_ms_25_runs": 0.033,
+    "witnesses": {
+      "fail": [
+        2,
+        155
+      ]
+    }
+  },
+  "incremental": [
+    {
+      "patients": 1,
+      "weeks_per_patient": 12,
+      "base_documents": 14,
+      "clinical_snapshot_match": true,
+      "modes": {
+        "incremental": {
+          "median_ms": 1.18,
+          "trials_ms": [
+            1.221,
+            1.18,
+            1.064
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 1,
+          "weeks_recomputed": 1
+        },
+        "full_patient_replay": {
+          "median_ms": 1.905,
+          "trials_ms": [
+            1.931,
+            1.905,
+            1.902
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 12,
+          "weeks_recomputed": 12
+        },
+        "full_collection_rebuild": {
+          "median_ms": 4.988,
+          "trials_ms": [
+            5.144,
+            4.988,
+            4.88
+          ],
+          "new_documents": 15,
+          "encounters_recomputed": 12,
+          "weeks_recomputed": 12
+        }
+      }
+    },
+    {
+      "patients": 100,
+      "weeks_per_patient": 12,
+      "base_documents": 1400,
+      "clinical_snapshot_match": true,
+      "modes": {
+        "incremental": {
+          "median_ms": 1.352,
+          "trials_ms": [
+            1.317,
+            1.352,
+            1.462
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 1,
+          "weeks_recomputed": 1
+        },
+        "full_patient_replay": {
+          "median_ms": 2.485,
+          "trials_ms": [
+            2.674,
+            2.485,
+            2.455
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 12,
+          "weeks_recomputed": 12
+        },
+        "full_collection_rebuild": {
+          "median_ms": 441.021,
+          "trials_ms": [
+            443.307,
+            440.893,
+            441.021
+          ],
+          "new_documents": 1401,
+          "encounters_recomputed": 1200,
+          "weeks_recomputed": 1200
+        }
+      }
+    },
+    {
+      "patients": 1,
+      "weeks_per_patient": 260,
+      "base_documents": 262,
+      "clinical_snapshot_match": true,
+      "modes": {
+        "incremental": {
+          "median_ms": 5.154,
+          "trials_ms": [
+            4.969,
+            5.154,
+            5.253
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 1,
+          "weeks_recomputed": 1
+        },
+        "full_patient_replay": {
+          "median_ms": 27.415,
+          "trials_ms": [
+            27.415,
+            26.925,
+            27.419
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 260,
+          "weeks_recomputed": 260
+        },
+        "full_collection_rebuild": {
+          "median_ms": 88.38,
+          "trials_ms": [
+            88.38,
+            89.147,
+            87.889
+          ],
+          "new_documents": 263,
+          "encounters_recomputed": 260,
+          "weeks_recomputed": 260
+        }
+      }
+    },
+    {
+      "patients": 250,
+      "weeks_per_patient": 24,
+      "base_documents": 6500,
+      "clinical_snapshot_match": true,
+      "modes": {
+        "incremental": {
+          "median_ms": 1.735,
+          "trials_ms": [
+            1.613,
+            1.735,
+            2.111
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 1,
+          "weeks_recomputed": 1
+        },
+        "full_patient_replay": {
+          "median_ms": 4.107,
+          "trials_ms": [
+            3.829,
+            4.107,
+            8.027
+          ],
+          "new_documents": 1,
+          "encounters_recomputed": 24,
+          "weeks_recomputed": 24
+        },
+        "full_collection_rebuild": {
+          "median_ms": 2131.54,
+          "trials_ms": [
+            2091.548,
+            2131.54,
+            2352.173
+          ],
+          "new_documents": 6501,
+          "encounters_recomputed": 6000,
+          "weeks_recomputed": 6000
+        }
+      }
+    }
+  ]
+}

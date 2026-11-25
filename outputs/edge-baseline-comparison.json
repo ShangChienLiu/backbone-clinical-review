@@ -1,0 +1,472 @@
+{
+  "baseline": "original backbone-clinical-review.zip",
+  "cases": 17,
+  "steps": 23,
+  "passed_steps": 9,
+  "failures": [
+    {
+      "id": "gem-a1-correction-then-stale-retransmission",
+      "line": 2,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "bounds": [
+          50,
+          50
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      }
+    },
+    {
+      "id": "gem-a1-correction-then-stale-retransmission",
+      "line": 3,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "bounds": [
+          30,
+          30
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "bounds": [
+          50,
+          50
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      }
+    },
+    {
+      "id": "gem-a3-exact-byte-duplicate-retry",
+      "line": 5,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "bounds": [
+          0,
+          0
+        ],
+        "goal": "cannot determine",
+        "encounters": {}
+      }
+    },
+    {
+      "id": "gem-a3-exact-byte-duplicate-retry",
+      "line": 6,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          60
+        ],
+        "bounds": [
+          60,
+          60
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            60
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "bounds": [
+          0,
+          0
+        ],
+        "goal": "cannot determine",
+        "encounters": {}
+      }
+    },
+    {
+      "id": "gem-a5-plan-under-target-then-complete-register",
+      "line": 9,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "not met",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": true
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E501": [
+            45
+          ]
+        },
+        "complete": false
+      }
+    },
+    {
+      "id": "gem-a6-exceeds-goal-with-incomplete-coverage",
+      "line": 10,
+      "pass": false,
+      "expected": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          95
+        ],
+        "bounds": [
+          95,
+          95
+        ],
+        "goal": "met",
+        "encounters": {
+          "ZZ-E601": [
+            45
+          ],
+          "ZZ-E602": [
+            50
+          ]
+        },
+        "complete": false
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "bounds": [
+          45,
+          45
+        ],
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E601": [
+            45
+          ]
+        },
+        "complete": false
+      }
+    },
+    {
+      "id": "cla-b1",
+      "line": 11,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q101",
+            12
+          ],
+          [
+            "ZZ-Q102",
+            8
+          ]
+        ],
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          50
+        ],
+        "goal": "cannot determine",
+        "forms": [],
+        "encounters": {
+          "ZZ-E101": [
+            50
+          ]
+        }
+      }
+    },
+    {
+      "id": "cla-b2",
+      "line": 12,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      }
+    },
+    {
+      "id": "cla-b2",
+      "line": 13,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [
+          [
+            "ZZ-Q201",
+            10
+          ]
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ],
+        "goal": "cannot determine",
+        "forms": [],
+        "encounters": {
+          "ZZ-E201": [
+            45
+          ]
+        }
+      }
+    },
+    {
+      "id": "oss-no-show-overrule",
+      "line": 15,
+      "pass": false,
+      "expected": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "encounters": {
+          "ZZ-E201": [
+            0
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [],
+        "encounters": {
+          "ZZ-E201": []
+        }
+      }
+    },
+    {
+      "id": "gpt-prose-clock",
+      "line": 18,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          40
+        ]
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ]
+      }
+    },
+    {
+      "id": "gpt-clock-unknown",
+      "line": 19,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [],
+        "bounds": [
+          0,
+          null
+        ]
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [
+          0
+        ],
+        "bounds": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gpt-group-break",
+      "line": 20,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ],
+        "encounters": {
+          "ZZ-E902": [
+            30
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 0,
+        "days": 0,
+        "minutes": [],
+        "encounters": {
+          "ZZ-E902": []
+        }
+      }
+    },
+    {
+      "id": "gpt-unsigned-amendment",
+      "line": 22,
+      "pass": false,
+      "expected": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          45
+        ]
+      },
+      "actual": {
+        "sessions": 1,
+        "days": 1,
+        "minutes": [
+          30
+        ]
+      }
+    }
+  ]
+}

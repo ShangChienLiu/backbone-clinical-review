@@ -1,0 +1,19 @@
+Record ID: LRC-203
+LINDEN RIDGE COUNSELING CENTER
+LATE ENTRY - ATTENDANCE AMENDMENT
+Client: Theodore Lindqvist | DOB: 1988-06-14 | MRN: LR-58831
+Amends: paper group sign-in sheet LRC-202 (Visit LR-V4471, Anxiety Skills group, date of service 03/03/2026)
+Amendment entered: 03/04/2026, 9:15 AM
+
+Field amended: Time In
+Original entry: 9:30 AM
+Corrected entry: 9:55 AM
+Time Out (11:00 AM) is correct as originally entered and is not changed.
+
+Explanation
+I completed the paper sheet after group closed on 3/3 and wrote the scheduled start time in Theo's Time In box. Reviewing the sheet the next morning against the front desk check-in log, which shows Theo checking in at the lobby at 9:52 AM, I confirmed that he entered the group room at 9:55 AM, while members were reviewing home practice. He told the group his bus had been delayed. He remained until group ended at 11:00.
+
+The original sheet is kept in the chart and this amendment is linked to it. No other client's entry is affected, and no additional service was provided in making this amendment.
+
+Electronically signed: Marcus Bell, LPC - 03/04/2026, 9:21 AM
+Status: Final
