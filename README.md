@@ -308,4 +308,6 @@ sh reproduce.sh reproduced
 
 ## Limits and design review
 
-Extraction recognizes known document formats. New layouts need validation for missed or mislinked evidence. The solver evaluates one week at a time and reports uncertainty when the evidence or search budget cannot support a verdict.
+- **Document formats.** The extractor recognizes known layouts. Check unfamiliar layouts for missed evidence or evidence linked to the wrong patient or visit.
+- **Weekly goals.** The treatment plan sets a goal for each week. The solver reports `cannot determine` when the evidence or search budget cannot establish a weekly verdict.
+- **Shared uncertainty across weeks.** The cohort review evaluates each week separately, then compares the verdicts. Suppose two weeks each need one more therapy day and 50 more minutes. One confirmed 50-minute visit could fall on a new therapy day in either week. Either placement makes one week meet the goal, so the two weeks cannot both fall short. The current cohort review flags this pair as uncertain.
