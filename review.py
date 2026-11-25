@@ -16,6 +16,10 @@ DAY = timedelta(days=1)
 WEEK = timedelta(days=7)
 
 
+class UnsupportedQuestion(ValueError):
+    """A request outside the available review types."""
+
+
 def week_start(day):
     return day - DAY * day.weekday()
 
@@ -161,12 +165,7 @@ def cached_weeks(db, patient_id, start, end):
         (patient_id, first, end))}
 
 
-def window_review(db, patient_id, start, end):
-    if date.fromisoformat(start) > date.fromisoformat(end):
-        raise ValueError("Review start is later than review end")
-    events = get_events(db, patient_id, start, end)
-    facts = get_claims(db, patient_id, ("plan", "coverage", "episode"))
-    episode = episode_covering(facts, start, end)
+def review_weeks(db, patient_id, start, end, events=None, facts=None):
     cached = cached_weeks(db, patient_id, start, end)
     weeks = []
     for day in weeks_between(start, end):
@@ -176,9 +175,24 @@ def window_review(db, patient_id, start, end):
                 and existing.get("certainty", {}).get("algorithm_version") == ALGORITHM_VERSION):
             weeks.append(existing)
             continue
-        subset = [e for e in events if first <= (e["date"] or "") <= last or
-                  (not e["date"] and (not e["date_candidates"] or any(first <= d <= last for d in e["date_candidates"])))]
+        if facts is None:
+            facts = get_claims(db, patient_id, ("plan", "coverage", "episode"))
+        if events is None:
+            subset = get_events(db, patient_id, first, last)
+        else:
+            subset = [e for e in events if first <= (e["date"] or "") <= last or
+                      (not e["date"] and (not e["date_candidates"] or any(first <= d <= last for d in e["date_candidates"])))]
         weeks.append(summarize_week(subset, facts, day, first, last))
+    return weeks
+
+
+def window_review(db, patient_id, start, end):
+    if date.fromisoformat(start) > date.fromisoformat(end):
+        raise ValueError("Review start is later than review end")
+    events = get_events(db, patient_id, start, end)
+    facts = get_claims(db, patient_id, ("plan", "coverage", "episode"))
+    episode = episode_covering(facts, start, end)
+    weeks = review_weeks(db, patient_id, start, end, events, facts)
     window_coverage = coverage(facts, start, end)
     return {
         "patient_id": patient_id, "window": [start, end], "coverage": window_coverage, "episode_scope": episode,
@@ -203,7 +217,9 @@ def symptom_review(db, patient_id, start, end, focus=()):
             "retrospective_summaries": [c for c in rows if c["kind"] == "retrospective_summary"], "issues": flags}
 
 
-def cohort_review(db, start, end):
+def cohort_review(db, start, end, *, compact=False):
+    if date.fromisoformat(start) > date.fromisoformat(end):
+        raise ValueError("Review start is later than review end")
     definite, uncertain, comparison = [], [], []
     for patient_id, names in patients(db).items():
         bounds = get_claims(db, patient_id, ("episode",))
@@ -214,9 +230,10 @@ def cohort_review(db, start, end):
                 continue
         else:
             first, last = start, end
-        review = window_review(db, patient_id, first, last)
+        review = None if compact else window_review(db, patient_id, first, last)
+        weeks = review_weeks(db, patient_id, first, last) if compact else review["weeks"]
         pair_results = []
-        for a, b in zip(review["weeks"], review["weeks"][1:]):
+        for a, b in zip(weeks, weeks[1:]):
             if not a["plan"] or not b["plan"]:
                 continue
             outcomes = {a["goal_status"], b["goal_status"]}
@@ -231,12 +248,16 @@ def cohort_review(db, start, end):
         if pair_results:
             item = {"patient_id": patient_id, "names": names, "pairs": pair_results}
             (definite if any(set(p["statuses"]) == {"not met"} for p in pair_results) else uncertain).append(item)
-        if any(w["events"] for w in review["weeks"]):
-            comparison.append({"patient_id": patient_id, "names": names, "window": review["window"],
-                               "weeks": review["weeks"], "total": review["total"]})
-    return {"window": [start, end], "two_consecutive_below": definite,
-            "eligibility_depends_on_unresolved_documentation": uncertain,
-            "patients": comparison}
+        if any(w["events"] for w in weeks):
+            summary = {"patient_id": patient_id, "names": names, "window": [first, last]}
+            if review is not None:
+                summary.update(weeks=weeks, total=review["total"])
+            comparison.append(summary)
+    result = {"window": [start, end], "two_consecutive_below": definite,
+              "eligibility_depends_on_unresolved_documentation": uncertain, "patients": comparison}
+    if compact:
+        result["detail"] = "summary"
+    return result
 
 
 def plan_changes(db, patient_id, start, end):
@@ -270,29 +291,84 @@ def explicit_dates(text, year=None):
     return days(text, year)
 
 
+def question_type(text):
+    if re.search(
+        r"\b(?:which|what)\s+(?:specific\s+)?(?:medications?|drugs?|prescriptions?|diagnos[ie]s|dosages?|billing codes?)\b"
+        r"|\bhow (?:many|much)\s+(?:doses?|medications?|visits were billed|did .{0,45} cost)\b"
+        r"|\b(?:who treated|which (?:clinician|therapist|provider)|what caused)\b", text
+    ):
+        match = None
+    elif re.search(r"\b(?:which|all) patients\b", text):
+        match = ("cohort" if re.search(
+            r"(?<![\w-])(?:two|2)\s+consecutive weeks\b|\bhad consecutive weeks\b", text
+        ) and re.search(r"\b(?:below|fell short|under|did not meet)\b", text) and
+                 re.search(r"\b(?:plan|goal|requirements?)\b", text) else None)
+    elif re.search(r"\b(?:before and after|plan changes?)\b", text) and re.search(r"\b(?:plan|therapy)\b", text):
+        match = "plan_changes"
+    elif re.search(r"\breconstruct (?:the )?(?:care|visits?|sessions?|encounters?)\b"
+                   r"|\b(?:what happened on|day.by.day)\b", text):
+        match = "details"
+    elif re.search(
+        r"\b(?:summarize|describe|review|show|list)\b[^?.]{0,75}\b(?:symptoms?|symptom course|assessments?)\b"
+        r"|\bsymptoms?\s+(?:progress|change|improve|worsen|review)\b"
+        r"|\b(?:latest |first |last )?(?:phq.?9|gad.?7)(?: scores?|\?|$)"
+        r"|\bwhich symptom assessments?\b|\bwhy\b[^?.]{0,90}\badditional individual contact\b", text
+    ):
+        match = "symptoms"
+    elif re.search(
+        r"\bhow (?:many|much) (?:therapy|psychotherapy|sessions?|treatment minutes|(?:distinct )?therapy days)\b"
+        r"|\bhow long\b.{0,60}\b(?:therapy|session|encounter)\b"
+        r"|\b(?:met|meet|below|reach)\b.{0,60}\b(?:goal|plan requirements?)\b"
+        r"|\b(?:weekly goal met|total therapy minutes|visits and minutes)\b"
+        r"|\b(?:therapy|attendance|treatment) (?:summary|review|totals?)\b", text
+    ):
+        match = "therapy"
+    else:
+        match = None
+    if match is None:
+        raise UnsupportedQuestion("Unsupported question. Choose therapy sessions, time, or goals, day reconstruction, "
+                                  "symptoms or assessments, plan changes, or patients with two consecutive weeks below goal.")
+    return match
+
+
 def route(db, text, *, patient_id=None, start=None, end=None, context=None):
     context = context or {}
-    low = text.casefold()
-    reference = context.get("start") or start
-    dates = explicit_dates(text, reference[:4] if reference else None)
-    if not patient_id:
-        match = set()
-        for key, names in patients(db).items():
+    kind = question_type(text.casefold())
+    is_cohort = kind == "cohort"
+    match = set()
+    excluded = set()
+    if not is_cohort:
+        available = patients(db)
+        for key, names in available.items():
             for token in [key, *names, *(n.split()[0] for n in names if n)]:
-                if re.search(r"(?i)\b" + re.escape(token) + r"\b", text):
-                    match.add(key)
-        if len(match) == 1:
-            patient_id = match.pop()
-        elif len(match) > 1:
+                for mention in re.finditer(r"\b" + re.escape(token) + r"\b", text, re.I):
+                    (excluded if re.search(r"\bnot\s+$", text[:mention.start()], re.I) else match).add(key)
+        if len(match) > 1:
             raise ValueError("Question mentions multiple patients. Use collection mode or a single patient.")
-    is_cohort = bool(re.search(r"which patients|all patients|collection|consecutive weeks|cohort", low))
-    patient_id = patient_id or (None if is_cohort else context.get("patient_id"))
-    if not patient_id and not is_cohort and len(patients(db)) == 1:
-        patient_id = next(iter(patients(db)))
+        if match:
+            named = match.pop()
+            if patient_id and patient_id != named:
+                raise ValueError("The named patient conflicts with --patient.")
+            patient_id = named
+        if patient_id in excluded:
+            raise ValueError("The requested patient is explicitly excluded.")
+        if not patient_id and context.get("patient_id") not in excluded:
+            patient_id = context.get("patient_id")
+        if not patient_id and len(available) == 1 and not excluded:
+            patient_id = next(iter(available))
+    if is_cohort or context.get("patient_id") != patient_id:
+        context = {}
+    reference = start or context.get("start")
+    week_hints = re.findall(r"\bweek of\s+(20\d{2}-\d{2}-\d{2})\b", text, re.I)
+    if len(week_hints) > 1:
+        raise ValueError("Supply one date window for the review.")
+    if week_hints and kind != "details":
+        monday = week_start(date.fromisoformat(week_hints[0]))
+        dates = [monday.isoformat(), (monday + 6 * DAY).isoformat()]
+    else:
+        dates = explicit_dates(text, reference[:4] if reference else None)
     focus = tuple(dict.fromkeys(dates))
-    detail = bool(re.search(r"reconstruct|on each date|what happened|day.by.day", low))
-    symptoms = bool(re.search(r"symptom|progress|phq.?9|gad.?7|anxiety|additional individual contact", low))
-    if detail or symptoms:
+    if kind == "symptoms" and len(focus) == 1 and "during the episode" in text.casefold():
         start = start or context.get("start") or (min(dates) if dates else None)
         end = end or context.get("end") or (max(dates) if dates else None)
     else:
@@ -300,18 +376,24 @@ def route(db, text, *, patient_id=None, start=None, end=None, context=None):
         end = end or (max(dates) if dates else context.get("end"))
     if not start or not end:
         raise ValueError("A review start and end are required. Pass --start and --end or state the range in the question.")
+    if date.fromisoformat(start) > date.fromisoformat(end):
+        raise ValueError("Review start is later than review end")
     if is_cohort:
         result = cohort_review(db, start, end)
     elif not patient_id:
         raise ValueError("Identify the patient in the question or supply --patient.")
-    elif symptoms:
+    elif kind == "symptoms":
         result = symptom_review(db, patient_id, start, end, focus)
-    elif re.search(r"before and after|plan change", low):
+    elif kind == "plan_changes":
         result = {"patient_id": patient_id, "changes": plan_changes(db, patient_id, start, end)}
-    elif detail:
+    elif kind == "details":
         focus = focus or (start,)
+        if any(not start <= day <= end for day in focus):
+            raise ValueError("A requested day is outside the review dates.")
         results = [window_review(db, patient_id, one, one) for one in focus]
         result = {"patient_id": patient_id, "days": results}
     else:
         result = window_review(db, patient_id, start, end)
-    return result, {"patient_id": patient_id, "start": start, "end": end}
+    # Reconstructing selected days in a batch leaves the broader episode scope available.
+    return result, {"patient_id": patient_id, "start": context.get("start", start) if kind == "details" else start,
+                    "end": context.get("end", end) if kind == "details" else end}

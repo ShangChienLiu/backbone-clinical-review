@@ -1,7 +1,7 @@
 {
-  "cases": 17,
-  "steps": 23,
-  "passed_steps": 23,
+  "cases": 18,
+  "steps": 26,
+  "passed_steps": 26,
   "failures": [],
   "results": [
     {
@@ -948,6 +948,119 @@
         "new_documents": 1,
         "duplicate_files": 0,
         "encounters_recomputed": 1,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gemini4-retry-and-competing-signed-note",
+      "line": 24,
+      "pass": true,
+      "expected": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          105
+        ],
+        "complete": true,
+        "goal": "not met"
+      },
+      "actual": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          105
+        ],
+        "complete": true,
+        "goal": "not met"
+      },
+      "work": {
+        "new_documents": 4,
+        "duplicate_files": 0,
+        "encounters_recomputed": 2,
+        "weeks_recomputed": 1
+      }
+    },
+    {
+      "id": "gemini4-retry-and-competing-signed-note",
+      "line": 25,
+      "pass": true,
+      "expected": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          105
+        ],
+        "complete": true,
+        "goal": "not met"
+      },
+      "actual": {
+        "sessions": 2,
+        "days": 2,
+        "minutes": [
+          105
+        ],
+        "complete": true,
+        "goal": "not met"
+      },
+      "work": {
+        "new_documents": 0,
+        "duplicate_files": 2,
+        "encounters_recomputed": 0,
+        "weeks_recomputed": 0
+      }
+    },
+    {
+      "id": "gemini4-retry-and-competing-signed-note",
+      "line": 26,
+      "pass": true,
+      "expected": {
+        "sessions": 3,
+        "days": 3,
+        "minutes": [
+          135,
+          155
+        ],
+        "complete": true,
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            30,
+            50
+          ],
+          "ZZ-E302": [
+            55
+          ],
+          "ZZ-E303": [
+            50
+          ]
+        }
+      },
+      "actual": {
+        "sessions": 3,
+        "days": 3,
+        "minutes": [
+          135,
+          155
+        ],
+        "complete": true,
+        "goal": "cannot determine",
+        "encounters": {
+          "ZZ-E301": [
+            30,
+            50
+          ],
+          "ZZ-E302": [
+            55
+          ],
+          "ZZ-E303": [
+            50
+          ]
+        }
+      },
+      "work": {
+        "new_documents": 2,
+        "duplicate_files": 1,
+        "encounters_recomputed": 2,
         "weeks_recomputed": 1
       }
     }

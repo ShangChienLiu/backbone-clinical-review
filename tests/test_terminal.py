@@ -34,10 +34,10 @@ class TerminalTest(unittest.TestCase):
             for item in range(1, 6):
                 self.assertIn(f"DEV-0{item} ·", output)
             self.assertIn("585 or 595 min", output)
-            self.assertIn("1 new · 0 reused", output)
+            self.assertIn("1 new with evidence · 0 new without evidence · 0 reused", output)
             report, = (workspace / "exports").glob("review-*.json")
             self.assertEqual(json.loads(report.read_text(encoding="utf-8"))["id"], "DEV-05")
 
             output = run(["4", str(delivery), "2", ""])
-            self.assertIn("0 new · 1 reused", output)
+            self.assertIn("0 new with evidence · 0 new without evidence · 1 reused", output)
             self.assertIn(PATIENT, output)

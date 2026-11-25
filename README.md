@@ -10,6 +10,8 @@ A Python and SQLite prototype for auditing what care a patient received. Import 
 
 Choose **1** for the five original questions, **2** for a patient review, **3** for a collection review, **4** to import a document folder, or **5** to save the last review or full abstraction as JSON. Reviews, imports, and exports run locally. The working database and exports are under `.backbone/` next to the launcher. Use `--workspace /path/to/folder` to store them elsewhere.
 
+The import report distinguishes new evidence, files stored for review with no extracted evidence, reused files, and files that failed to read. Collection review saves a summary of matching patients and weeks. Open a patient review for the source evidence, or use the scriptable CLI for a detailed collection report.
+
 **From source.** Run `python3 terminal.py` with Python 3.10 or newer. The guided terminal and the scriptable CLI share the same SQLite review engine. The bundled text files are ready to import. Text-layer PDFs use Poppler's `pdftotext`, basic DOCX extraction is supported, and scanned PDFs require OCR text.
 
 ```sh
@@ -22,7 +24,7 @@ python3 clinical.py --db review.sqlite export > abstraction.json
 python3 clinical.py --db review.sqlite ingest /path/to/new-delivery
 ```
 
-`ask --patient NAME --start YYYY-MM-DD --end YYYY-MM-DD` supplies an explicit scope. A question in `answer` may inherit the preceding question's patient and date window. Use [the saved combined database](outputs/combined.sqlite) for questions about the three-patient example.
+`ask --patient NAME --start YYYY-MM-DD --end YYYY-MM-DD` supplies an explicit scope. A question in `answer` may inherit the preceding question's scope for the same patient. Use `week of YYYY-MM-DD` for a Monday–Sunday review. Unsupported free-text questions exit with code 3 and print the supported reviews to standard error. A mixed import still saves readable files and exits with code 2 if any file failed. Use [the saved combined database](outputs/combined.sqlite) for questions about the three-patient example.
 
 ## System design whiteboard
 
@@ -199,6 +201,8 @@ The 6,000-file synthetic run spent **3.82 of 5.07 seconds** in extraction in `le
 
 **500,000 requests needs a time window.** As a sizing example, **500,000 requests/day** is **5.8 requests/s** on average. A hypothetical 10× peak is about **58 requests/s**. Separate patient lookups from cohort scans in the load test. Measure HTTP p95, contention, import lag, and response size under concurrent writes. The local ingest benchmark does not establish an HTTP capacity or latency target.
 
+On the 6,500-document synthetic collection, the terminal's summary path took **69.85 ms** versus **205.05 ms** for a detailed cohort report, medians from nine in-process runs covering 250 patients and 24 weeks each. Both found the same patients and week pairs. The summary reuses saved results for matching date slices and recomputes stale or clipped weeks.
+
 ![One HTTP API and an ingest worker publish and read revisions in a shared database](docs/diagrams/scale-topology.png)
 
 <details>
@@ -251,7 +255,7 @@ The case supporting a verdict is inspectable as dates, intervals and source line
 - **Rowan.** 12 sessions on 11 days. The signed January 26 alternatives yield **585 or 595 minutes** overall. Jan 5 fell below goal and Jan 19 met it. Jan 12 lacks full coverage and Jan 26 spans the goal boundary. [Five development answers](outputs/development-review.md)
 - **Multiple patients and a plan change.** [Collection review](outputs/evaluation-review.md) and [computed plan-change snapshot](outputs/plan-change.json) show the same abstraction handles the additional example charts.
 - **Sources.** `documents/` has 31 development records. Two public mirrors match each other and both question files exactly match the provided `questions.json`. The organizer's Drive folder was unavailable. `evaluation-documents/` is a separate public example collection. [Pinned sources and checksums](source-manifest.json)
-- **Tests and benchmarks.** The synthetic fixture schema has three fields, `id`, `add` and `expect`. The curated suite passed 23/23 deliveries. The development benchmark records initial and cached ingestion, warm and fresh-process queries, saved database size, and model use. [Fixture design](tests/edge_cases.md), [benchmark results](outputs/benchmarks.json)
+- **Tests and benchmarks.** The synthetic fixture schema has three fields, `id`, `add` and `expect`. The curated suite passed 26/26 deliveries. The development benchmark records initial and cached ingestion, warm and fresh-process queries, saved database size, and model use. [Fixture design](tests/edge_cases.md), [benchmark results](outputs/benchmarks.json)
 
 ```sh
 python3 -m unittest discover -s tests -v

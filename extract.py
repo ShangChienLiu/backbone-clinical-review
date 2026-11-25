@@ -17,6 +17,7 @@ ENCOUNTER = r"(?i)\b(?:encounter|visit|related appointment)\s*:?\s*([A-Z]{2,}(?:
 APPOINTMENT = r"(?i)\bAppointment(?:\s+ID)?\s*:?\s*([A-Z]{2,}(?:-[A-Z0-9]+)+\d)\b"
 ASSESSMENT = r"\b(PHQ[- ]?9|GAD[- ]?7)\b"
 THERAPY = {"group", "individual", "family", "other_therapy"}
+NO_SUPPORTED_CLAIMS = "No supported clinical claim extracted"
 
 
 def days(text, year=None):
@@ -431,7 +432,7 @@ def extract(name: str, text: str):
             if "authorized quantity" in line.casefold():
                 emit(number, line, "administrative", "authorization", role="administrative")
     if not result["claims"]:
-        result["warnings"].append("No supported clinical claim extracted")
+        result["warnings"].append(NO_SUPPORTED_CLAIMS)
     elif (doc_service in THERAPY - {"group"} and first_encounter and status == "signed"
             and not (register or admin or form or attached or amendment or clinical_addendum or plan)
             and re.search(r"(?im)^.*(?:patient contact|patient.present|elapsed time|received .*therapy|participated in .*therapy)", text)

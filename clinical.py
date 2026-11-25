@@ -8,7 +8,7 @@ from contextlib import closing
 from pathlib import Path
 
 from ledger import database, dump, find_patient, ingest, patients
-from review import route
+from review import UnsupportedQuestion, route
 
 
 def main():
@@ -46,6 +46,9 @@ def main():
                 output = patients(db)
         print(json.dumps(output, ensure_ascii=False, indent=2))
         return 2 if args.command == "ingest" and output["errors"] else 0
+    except UnsupportedQuestion as err:
+        print(str(err), file=sys.stderr)
+        return 3
     except (ValueError, OSError, sqlite3.Error) as err:
         print(str(err), file=sys.stderr)
         return 2

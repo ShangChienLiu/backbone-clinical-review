@@ -11,8 +11,10 @@ import subprocess
 import time
 from collections import defaultdict
 from pathlib import Path
+from xml.etree import ElementTree
+from zipfile import BadZipFile, ZipFile
 
-from extract import extract
+from extract import NO_SUPPORTED_CLAIMS, extract
 from reconcile import group_claims, reconcile_event
 
 EXTRACTOR_VERSION = "text-rules-4"
@@ -81,10 +83,11 @@ def read_source(path, raw):
         pages = extracted.rstrip("\f").split("\f")
         return "\n".join(f"[PAGE {index}]\n{page.rstrip()}" for index, page in enumerate(pages, 1))
     if path.suffix.lower() == ".docx":
-        from xml.etree import ElementTree
-        from zipfile import ZipFile
-        with ZipFile(io.BytesIO(raw)) as zip_file:
-            root = ElementTree.fromstring(zip_file.read("word/document.xml"))
+        try:
+            with ZipFile(io.BytesIO(raw)) as zip_file:
+                root = ElementTree.fromstring(zip_file.read("word/document.xml"))
+        except (BadZipFile, KeyError, ElementTree.ParseError):
+            raise ValueError("Invalid DOCX: expected a readable word/document.xml") from None
         ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
         return "\n".join("".join(node.text or "" for node in p.findall(".//w:t", ns)) for p in root.findall(".//w:p", ns))
     return raw.decode("utf-8-sig")
@@ -95,7 +98,8 @@ def ingest(db, source):
     if not source.is_dir():
         raise ValueError(f"Document directory missing: {source}")
     started = time.perf_counter()
-    totals = {"files": 0, "new_documents": 0, "duplicate_files": 0, "cached_files": 0, "claims_added": 0,
+    totals = {"files": 0, "new_documents": 0, "new_with_evidence": 0, "stored_without_evidence": [],
+              "duplicate_files": 0, "cached_files": 0, "claims_added": 0,
               "patient_replays": 0, "encounters_recomputed": 0, "encounters_removed": 0,
               "weeks_recomputed": 0, "extraction_seconds": 0, "reconciliation_seconds": 0,
               "model_calls": 0, "model_tokens": 0, "model_api_cost_usd": 0, "errors": [], "warnings": []}
@@ -115,10 +119,15 @@ def ingest(db, source):
             try:
                 raw = path.read_bytes()
                 digest = hashlib.sha256(raw).hexdigest()
-                exists = db.execute("SELECT 1 FROM documents WHERE digest=?", (digest,)).fetchone()
+                exists = db.execute("SELECT patient_id,warnings FROM documents WHERE digest=?", (digest,)).fetchone()
                 if exists:
                     inserted = db.execute("INSERT OR IGNORE INTO aliases VALUES(?,?)", (label, digest)).rowcount
                     totals["duplicate_files" if inserted else "cached_files"] += 1
+                    if not exists["patient_id"] or NO_SUPPORTED_CLAIMS in json.loads(exists["warnings"]):
+                        totals["stored_without_evidence"].append({
+                            "path": label, "reason": "missing_patient_id" if not exists["patient_id"] else "no_supported_claims",
+                            "reused": True,
+                        })
                     continue
                 body = read_source(path, raw)
                 evidence = extract(label, body)
@@ -135,8 +144,14 @@ def ingest(db, source):
                 claim.update(document_id=doc_id, path=label, digest=digest)
                 db.execute("INSERT INTO claims(digest,patient_id,date,kind,payload) VALUES(?,?,?,?,?)",
                            (digest, patient_id, claim["date"], claim["kind"], encode(claim)))
-            if patient_id:
+            if evidence["claims"]:
                 touched[patient_id].extend(c for c in evidence["claims"] if c["kind"] in {"plan", "coverage", "episode"})
+                totals["new_with_evidence"] += 1
+            else:
+                totals["stored_without_evidence"].append({
+                    "path": label, "reason": "missing_patient_id" if not patient_id else "no_supported_claims",
+                    "reused": False,
+                })
             totals["new_documents"] += 1
             totals["claims_added"] += len(evidence["claims"])
             if evidence["warnings"]:

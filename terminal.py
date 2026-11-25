@@ -244,7 +244,7 @@ def patient_review(db):
 
 
 def collection_review(db):
-    result = cohort_review(db, *input_window(db))
+    result = cohort_review(db, *input_window(db), compact=True)
     print(f'  Patients with encounters: {len(result["patients"])}')
     for label, key in (
         ("Two consecutive weeks below goal", "two_consecutive_below"),
@@ -275,12 +275,21 @@ def import_documents(db):
         return
     report = ingest(db, input_path(source))
     reused = report["cached_files"] + report["duplicate_files"]
-    print(f'  {report["new_documents"]} new · {reused} reused · {report["encounters_recomputed"]} encounters'
-          f' and {report["weeks_recomputed"]} weeks recomputed')
+    stored = report["stored_without_evidence"]
+    new_without = report["new_documents"] - report["new_with_evidence"]
+    print(f'  {report["new_with_evidence"]} new with evidence · {new_without} new without evidence'
+          f' · {reused} reused · {len(report["errors"])} failed')
+    print(f'  Recomputed {report["encounters_recomputed"]} encounters and {report["weeks_recomputed"]} weeks')
+    reasons = {"missing_patient_id": "missing patient identifier", "no_supported_claims": "no supported claims"}
+    for entry in stored:
+        origin = "Reused" if entry["reused"] else "Stored"
+        print(f'  {origin} without evidence: {entry["path"]} ({reasons[entry["reason"]]})')
     for error in report["errors"]:
         print(f'  {error["path"]}: {error["error"]}')
+    flagged = {entry["path"] for entry in stored}
     for warning in report["warnings"]:
-        print(f'  {warning["path"]}: {"; ".join(warning["warnings"])}')
+        if warning["path"] not in flagged:
+            print(f'  {warning["path"]}: {"; ".join(warning["warnings"])}')
 
 
 def export_json(db, folder, latest):
