@@ -2,7 +2,7 @@
 
 A Python and SQLite prototype for auditing what care a patient received. Import the documents once, then answer new patient and cohort questions from saved evidence. Each computed answer can be traced to source lines.
 
-[Run it](#run-locally) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Validation](#why-these-designs-earned-their-place)
+[Run it](#run-locally) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Next optimization](#next-optimization) · [Validation](#why-these-designs-earned-their-place)
 
 ## Run locally
 
@@ -56,8 +56,8 @@ flowchart TB
 
 </details>
 
-- **Write.** SHA-256 identifies byte-identical inputs. A new alias is saved if the path changed. A new document is extracted into source-anchored claims. Encounter fingerprints identify affected projections. Plan and coverage changes can refresh a week without rewriting its encounters.
-- **Read.** The query uses saved encounters and week results. A different date window or a stale algorithm version causes the week to be computed from stored claims and events. The numeric path runs Python and SQLite with zero model calls.
+- **Write.** SHA-256 identifies byte-identical inputs. A new alias is saved if the path changed. A new document is extracted into source-anchored claims. Encounter fingerprints identify affected projections. Plan and coverage changes can refresh a week without rewriting its encounters. A file with zero extracted evidence remains in the ledger and stays visible for review on retry.
+- **Read.** A patient review uses saved encounters and week results. A collection summary still visits each patient, but it can skip encounter payloads when the saved weeks match the requested slices and solver version. Missing, clipped, or stale weeks use the same evaluator as patient review. The numeric path runs Python and SQLite with zero model calls.
 
 Code entry points are [guided terminal](terminal.py), [scriptable CLI](clinical.py), [ingest and storage](ledger.py), [encounter reconciliation](reconcile.py), and [review queries](review.py).
 
@@ -234,10 +234,50 @@ A database-backed job table is enough to start. The worker and API can share a d
 | Backfills delay requests or imports fall behind | Run the ingest worker separately. Track the oldest job and retry by manifest identity. |
 | Long charts make updates expensive | Index claim dependencies by patient and encounter. Expand to other dates only for affected shared evidence or plan periods. |
 | A single writer or shared-file deployment limits concurrency | Move the same tables and transaction semantics to PostgreSQL. Serialize concurrent changes for the same patient. |
-| Cohort queries repeatedly read long event payloads | Read compact patient-week rows first. Page results at one revision and fetch supporting evidence for selected findings. |
+| Cohort queries spend time on per-patient reads and JSON decoding | Batch the existing week projection. Page at one revision and load proof details for selected results. |
 | Identical queries still dominate the read budget | Cache by collection, access scope, data revision, normalized query, evidence detail, and solver version. |
 
 The deployment preserves the same ingest and review interfaces as the workload grows. Each new process has a measured reason to exist.
+
+## Next optimization
+
+**Batch cohort reads over the existing week table first.** The current cohort summary avoids most encounter payloads, then issues week reads and decodes saved JSON patient by patient. One batch read can project the fields used for cohort discovery. The current summary interface and the SQLite schema can stay in place. Patient reviews still load their evidence and witnesses from the same database.
+
+| Local prototype, 6,500 base files and 250 patients | Shipped compact review | Batched read of existing JSON | Batch over typed columns | Weeks recalculated by each candidate |
+| --- | ---: | ---: | ---: | ---: |
+| Full 24-week window | 71.77 ms | 49.54 ms | 22.69 ms | 0 |
+| Both endpoint weeks clipped | 85.89 ms | 63.76 ms | 37.57 ms | 500 |
+| Missing rows and old solver versions | 89.13 ms | 70.11 ms | 46.54 ms | 1,091 |
+| Empty week cache | 132.33 ms | 126.19 ms | 125.49 ms | 6,000 |
+
+Both scratch candidates returned the same complete summary as the shipped code, including pair classifications, encounter IDs, coverage flags, and patient ranges. A separate check matched the batched JSON result to a run that deleted every saved week and recomputed from the ledger. The figures are local in-process medians of nine runs per case. The typed variant reads an experimental projection whose build and maintenance costs are outside the timings. Concurrency and capacity at 500,000 documents still require a load test.
+
+<details>
+<summary>Benchmark setup</summary>
+
+Generate the input with `build_documents(root, 250, 24)`. Ingest the base delivery and its single amendment. The full range is April 6 through September 20, 2026. The clipped range is April 8 through September 18. For the mixed case, remove week rows with `rowid % 10 = 0`, then set the solver version of the remaining rows with `rowid % 11 = 0` to zero. For the empty-cache case, clear the week table. Compare `cohort_review(..., compact=True)` with one range read that projects fields using `json_extract`, then run the same candidate over a temporary table containing those fields. Rotate the execution order and compare the full output after every timed run. [Synthetic generator](validate_design.py)
+
+</details>
+
+### Keep the same answer when a cached week is missing
+
+1. Start from the selected patients and derive their expected weeks from the requested range and any single documented episode. A patient with zero saved rows still needs evaluation.
+2. Read week fields in one batch, then stream by patient and Monday. A usable row matches the patient, Monday, exact evaluated dates, and solver version. Ingest updates or invalidates every affected week in the same transaction as the supporting claims. A coverage amendment can affect neighboring weeks even when their dates and solver version match. Recompute only the mismatched or absent slices using the shared evaluator.
+3. Compare consecutive calendar weeks with the existing pair rules. Load proof and source excerpts only for details requested at that revision. A visit with an unresolved date, missing coverage, or disputed duration must preserve the evaluator's uncertainty.
+
+Typed columns are the next escalation if JSON decoding still dominates after batching. Materializing consecutive pairs would reduce repeated discovery work further. It would also require refreshing both neighboring pairs when one week changes, and proving that all requested weeks were considered before returning an empty list. Revisit that option if the same aligned cohort report dominates measured traffic.
+
+### Keep file reading off the write transaction
+
+For recurring deliveries, keep one ingest job per manifest. Read each immutable file once and hash and extract from the same bytes. Keep this work outside the write transaction. When publishing, recheck the content hash against the database, write new claims, and update the affected encounters and weeks atomically. A read-only existence check can skip extraction for known hashes. The write transaction still checks for competing imports.
+
+The filename can supply a document ID or a missing year. In a synthetic check, the same body containing “April 6” produced service dates in 2026 and 2027 under two different filenames. Use the digest for byte deduplication. Add the extractor version and relevant filename context to any extraction cache key, or establish a canonical source name before extraction. A manifest tracks file delivery. Evidence of complete clinical attendance still comes from the chart. [Filename fallbacks](extract.py#L130)
+
+For long charts, consider indexed replay for amendments with an unambiguous encounter ID. Keep whole-patient regrouping for changes to shared rules, coverage, plan dates, or unresolved encounter links. In a synthetic stress check, one amendment recomputed one encounter and one week for both 260- and 1,040-week charts. Median import time over seven runs rose from **5.09 ms to 17.93 ms**. The existing implementation still reads and fingerprints the affected patient's claims.
+
+Before rollout, compare batched results with the evaluator on clipped weeks, stale or missing rows, sparse charts, and late amendments. Include a coverage amendment that crosses saved weeks and two workers replaying the same bytes under different filenames. Compare interrupted and retried imports with a serial run. Measure p95, rows read, fallback counts, and writer lock time under a mixed import and query workload.
+
+GPT-6.2 Astra reviewed the batch query and its fallback against an uncached run. Claude Fable 5.2 reviewed transaction staging and competing retries. Gemini 4 Hydrogen reviewed cross-week invalidation and the cost of materializing adjacent pairs. The prototypes and comparisons above were run locally against the existing evaluator.
 
 ## Why these designs earned their place
 
