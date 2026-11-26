@@ -299,11 +299,12 @@ Benchmark time under the write lock and compare retries with a serial import. On
 
 | Design | Evidence |
 | --- | --- |
-| **Recompute affected results** | One late amendment updated one encounter and one week. An identical retransmission required zero updates. [Work counters](outputs/benchmarks.json) |
-| **Check days and minutes together** | Three days and 145 minutes falls short on time. Two days and 155 minutes falls short on days. The solver matched exhaustive enumeration in **640/640** synthetic trials. [Validation study](outputs/design-validation.md) |
+| **Incremental view maintenance** | Update the saved encounters and weeks affected by a correction. One late amendment updated one encounter and one week. An identical retransmission required zero updates. [Work counters](outputs/benchmarks.json) |
+| **Explainable certain answers** | Check days and minutes together for each interpretation supported by the records. Three days and 145 minutes falls short on time. Two days and 155 minutes falls short on days. The solver matched exhaustive enumeration in **640/640** synthetic trials. [Validation study](outputs/design-validation.md) |
+| **Dynamic programming with state compression** | Finalize minutes once they can no longer overlap later choices. Merge states that have the same effect on the verdict. The solver matched exhaustive enumeration on a stress test with **16,384** possible combinations. [Stress test](outputs/design-validation.md#stress-test-and-optimization) |
 | **Require coverage to prove a shortfall** | In 120 withheld-document trials, treating partial data as complete gave 40 false definite verdicts. Requiring coverage avoided all 40. [Validation study](outputs/design-validation.md) |
 
-Each verdict can be traced to dates, intervals, and source lines. [Explainable Certain Answers](https://ijcai.org/proceedings/2018/233) · [Solver stress test](outputs/design-validation.json)
+Each verdict can be traced to dates, intervals, and source lines. [Explainable Certain Answers](https://ijcai.org/proceedings/2018/233)
 
 ## Results and reproducibility
 
