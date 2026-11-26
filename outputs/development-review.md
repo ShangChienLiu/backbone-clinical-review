@@ -1,6 +1,6 @@
 # Rowan Mercer clinical review
 
-**January 5–30, 2026 · 12 attended therapy sessions on 11 distinct days · 585 or 595 patient-present minutes.** Two public mirrors contain the same 31 source files byte for byte and both contain an exact copy of the provided question file. This review uses those files as the development chart and applies the January 30 episode end. [Source manifest](../source-manifest.json), [saved abstraction](rowan-abstraction.json), [computed answers](development-answers.json).
+**January 5–30, 2026 · 12 attended therapy sessions on 11 distinct days · 585 or 595 patient-present minutes.** All 31 source files match the organizer's Drive folder byte for byte. The submitted question file matches the one provided, and a fresh run from the Drive files reproduced all five answers and their evidence. This review applies the January 30 episode end. [Source manifest](../source-manifest.json) · [Saved abstraction](rowan-abstraction.json) · [Computed answers](development-answers.json)
 
 ## DEV-01 · Therapy sessions and dates
 

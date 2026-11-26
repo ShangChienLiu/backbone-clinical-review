@@ -322,7 +322,7 @@ Benchmark time under the write lock and compare retries with a serial import. On
 - **Development chart.** Rowan attended 12 sessions on 11 days, for **585 or 595 minutes**. [Five development answers](outputs/development-review.md)
 - **Inspect the abstraction.** [Saved SQLite](outputs/combined.sqlite) · [Rowan's structured evidence](outputs/rowan-abstraction.json) · [Five computed answers](outputs/development-answers.json)
 - **Additional charts.** [Cohort results](outputs/evaluation-review.md) · [Plan change](outputs/plan-change.json)
-- **Sources.** Two public mirrors supplied matching copies of the 31 development files and the provided question file because the organizer's Drive folder was unavailable. The evaluation charts come from a separate public example set. [Sources and checksums](source-manifest.json)
+- **Sources.** All 31 development files match the organizer's Google Drive folder byte for byte. The submitted `questions.json` matches the provided question file. A fresh run from the Drive files reproduced all five answers and their supporting evidence. The evaluation charts come from a separate public example set. [Sources and checksums](source-manifest.json) · [Verification log](logs/audit.log)
 - **Verification.** The curated suite passed 26/26 deliveries. [Execution log](logs/incremental-reproduce.log) · [Source audit](logs/audit.log) · [Fixtures and model contributions](tests/edge_cases.md) · [Benchmark results](outputs/benchmarks.json)
 
 ```sh
