@@ -4,7 +4,7 @@ A Python and SQLite tool for reviewing clinical records. Import documents once, 
 
 Two signed notes disagree about one of Rowan's sessions. The weekly total could be **145 or 155 minutes** against a **150-minute goal**. Backbone reports **cannot determine** and cites both notes. [Worked example](outputs/development-review.md)
 
-[Run it](#run-locally) · [Take-home summary](#take-home-summary) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Trade-offs](#next-optimization)
+[Run it](#run-locally) · [Measured results](#validation) · [Take-home summary](#take-home-summary) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Trade-offs](#next-optimization)
 
 ## Run locally
 
@@ -40,11 +40,23 @@ Text and DOCX files can be imported directly. Text-layer PDFs require `pdftotext
 ## Take-home summary
 
 - **Approach.** Hash files to detect duplicates, extract evidence with deterministic rules, and store quotes and source lines in SQLite. Reconcile conflicting records and recompute only the affected encounters and weeks. Reviews use the saved evidence and report uncertainty when the record does not settle a verdict.
-- **Decision tested.** Batch the read of saved cohort weeks. On 6,500 synthetic files, the median for a full-window summary dropped from **71.56 ms to 49.50 ms** with identical output. With an empty week cache, both versions took about **134 ms**. Batching pays off when prior results can be reused. [Benchmark and trade-offs](#next-optimization)
+- **Decision tested.** Batch the read of saved cohort weeks. This saved time when prior results could be reused. With an empty week cache, both versions took about **134 ms**. [Before and after](#validation) · [Benchmark setup](#next-optimization)
 - **Observed limitation and next test.** A correction still scans the affected patient's claims before deciding what to update. It took **5.154 ms** on one synthetic 260-week chart versus **1.735 ms** in a larger collection with 24 weeks per patient. Test encounter-scoped claim lookups on long charts and compare verdicts and source evidence with a full replay, including plan and coverage changes. [Incremental test](outputs/design-validation.md#incremental-updates)
 - **First bottleneck at a million documents.** Expect cold extraction of new files to dominate. Extraction took **3.82 of 5.07 seconds** in a run with 6,000 unique synthetic documents. A million-document run remains unmeasured. Profile extraction, file reads, and write time separately on a representative source mix. [Scale measurements](outputs/synthetic-scale.json)
 - **Runtime and model cost.** On the 31-file development chart, local medians were **27 ms** for a cold import, **0.56 ms** for a warm patient query, and **44 ms** for the same query in a fresh CLI process. Import and review use **zero model calls and $0 in model API cost**. [Benchmark data](outputs/benchmarks.json)
 - **Coding and model assistance.** Codex helped implement, test, and document the project. The original fixture pass used Gemini 3.8 Flash (Medium), Claude Sonnet 4.6 (Thinking), and GPT-OSS 120B (Medium). The hardening pass used GPT-6.2 Astra, Claude Fable 5.2, and Gemini 4 Hydrogen at extra-high effort. Design follow-ups also used high effort for Fable and Hydrogen. Per-run subscription costs for the model assistance are unavailable. [Fixture provenance](tests/edge_cases.md)
+
+## Validation
+
+| Method | Before | After | What changed |
+| --- | --- | --- | --- |
+| **Explainable certain answers** | **520/640** verdicts matched exhaustive enumeration when checking days and minutes separately. | **640/640** matched when checking days and minutes together in each supported scenario. | Resolved all **120** deliberately constructed shortfalls where separate bounds left the result uncertain. [Validation study](outputs/design-validation.md#weekly-certainty-against-the-exhaustive-oracle) |
+| **Dynamic programming with state compression** | **8.345 ms**, then the search limit left the verdict unresolved. | **0.033 ms**, with the correct shortfall verdict. | Finalize minutes that can no longer overlap and merge equivalent states. On this **16,384-combination** case, exhaustive enumeration reached the same verdict in **106.246 ms**, about **3,200×** the optimized time. [Stress test](outputs/design-validation.md#stress-test-and-optimization) |
+| **Incremental view maintenance** | **2.132 s** to rebuild the collection after one amendment. | **1.735 ms** to apply the amendment incrementally. | Recomputed **one encounter and one week** in a 6,500-file fixture, with identical saved results. The rebuild took about **1,200×** as long as the local update. [Incremental test](outputs/design-validation.md#incremental-updates) |
+| **Batched reads in one SQLite snapshot** | **71.56 ms** for a full-window cohort summary using per-patient reads. | **49.50 ms** with one batch read of saved week fields. | **31% less time** for the same summary on 6,500 synthetic files. Saved weeks and fallback calculations use one read snapshot. [Benchmark setup](#next-optimization) |
+| **Attendance coverage checks** | **40** incorrect definite verdicts in 120 withheld-document trials. | **0** incorrect definite verdicts after requiring coverage evidence for a shortfall. | Kept all **40** passing results that the available evidence already proved. [Withheld-document test](outputs/design-validation.md#incomplete-charts) |
+
+The timing comparisons are local medians on synthetic test data. Weekly verdicts retain dates, time intervals, and source lines for inspection. [Explainable Certain Answers](https://ijcai.org/proceedings/2018/233)
 
 ## System design whiteboard
 
@@ -222,7 +234,7 @@ The proposed adapter answers and cites evidence from one revision. The worker pu
 
 ### Design for 500,000
 
-**Documents.** On 6,500 synthetic documents, one amendment took **1.735 ms** incrementally versus **2.132 s** for a full rebuild, with identical results. At larger scale, ingest each delivery from a manifest and refresh affected results. Cold import spent **3.82 of 5.07 seconds** extracting text evidence in a separate 6,000-file run. [Incremental test](outputs/design-validation.md) · [Cold import test](outputs/synthetic-scale.json)
+**Documents.** Ingest each delivery from a manifest and refresh affected results. In the cold-import test, text extraction took **3.82 of 5.07 seconds** for a collection with 6,000 unique documents. [Incremental results](#validation) · [Cold import test](outputs/synthetic-scale.json)
 
 **Requests.** 500,000 requests/day averages **5.8 requests/s**. A modeled 10× peak is about **58 requests/s**. Load-test patient lookups and full cohort scans separately during concurrent imports. The 500,000-document import and HTTP workload still need measurement.
 
@@ -264,8 +276,6 @@ Start with one database and a job table. The API and ingest worker can share a d
 
 **Decision.** Keep batching. Measure how often the same partial week is queried before adding a cache. Consider DBSP if several fixed reports need to stay current. [Research and trade-offs](docs/optimization-research.md)
 
-On 6,500 synthetic files, the full-window cohort query fell from **71.56 ms to 49.50 ms**, with identical summaries. This is the median of 11 local runs.
-
 <details>
 <summary>Benchmark cases and cache rules</summary>
 
@@ -294,17 +304,6 @@ Read, hash, and extract files before the write transaction. Recheck for duplicat
 Benchmark time under the write lock and compare retries with a serial import. On long charts, consider indexed replay for an amendment that names one encounter. Keep patient-wide regrouping for shared rules, plan changes, and unresolved links.
 
 </details>
-
-## Validation
-
-| Design | Evidence |
-| --- | --- |
-| **Incremental view maintenance** | Update the saved encounters and weeks affected by a correction. One late amendment updated one encounter and one week. An identical retransmission required zero updates. [Work counters](outputs/benchmarks.json) |
-| **Explainable certain answers** | Check days and minutes together for each interpretation supported by the records. Three days and 145 minutes falls short on time. Two days and 155 minutes falls short on days. The solver matched exhaustive enumeration in **640/640** synthetic trials. [Validation study](outputs/design-validation.md) |
-| **Dynamic programming with state compression** | Finalize minutes once they can no longer overlap later choices. Merge states that have the same effect on the verdict. The solver matched exhaustive enumeration on a stress test with **16,384** possible combinations. [Stress test](outputs/design-validation.md#stress-test-and-optimization) |
-| **Require coverage to prove a shortfall** | In 120 withheld-document trials, treating partial data as complete gave 40 false definite verdicts. Requiring coverage avoided all 40. [Validation study](outputs/design-validation.md) |
-
-Each verdict can be traced to dates, intervals, and source lines. [Explainable Certain Answers](https://ijcai.org/proceedings/2018/233)
 
 ## Results and reproducibility
 
