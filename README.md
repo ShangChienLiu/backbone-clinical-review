@@ -1,10 +1,10 @@
 # Backbone · Clinical evidence ledger
 
-A Python and SQLite tool for reviewing clinical records. Import documents once, then answer patient and cohort questions with numbers and source citations.
+Backbone turns scattered clinical records into a saved SQLite ledger. Import once, then reopen it to answer patient and cohort questions with calculations and source lines. **One correction updated one encounter and one week in a 6,500-file test.** [Measured results](#validation)
 
 Two signed notes disagree about one of Rowan's sessions. The weekly total could be **145 or 155 minutes** against a **150-minute goal**. Backbone reports **cannot determine** and cites both notes. [Worked example](outputs/development-review.md)
 
-[Run it](#run-locally) · [Measured results](#validation) · [Take-home summary](#take-home-summary) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Trade-offs](#next-optimization)
+[Run it](#run-locally) · [Review artifacts](#results-and-reproducibility) · [Measured results](#validation) · [System design](#system-design-whiteboard) · [Scale plan](#design-for-500000)
 
 ## Run locally
 
@@ -17,6 +17,14 @@ Press **1** for the five original questions, **2** for a patient review, **3** f
 To verify imports, unzip the fictional sample and import `01-original`. Review Avery Demo and expect **3 sessions on 3 days, 140 minutes, not met**. Then import `02-correction` and review again for **150 minutes, met**. The sample includes the expected import counts. [Download the import sample](https://github.com/ShangChienLiu/backbone-clinical-review/releases/download/v1.2.2/backbone-import-demo.zip)
 
 From source, run `python3 terminal.py` with Python 3.10 or newer.
+
+<details>
+<summary>Try the related questions</summary>
+
+- **Plan change.** Choose **2 → Theo Lindqvist → Plan changes** for March 2–29, 2026. Compare the goal and documented visits, dates, minutes, and service types on each side of March 16.
+- **Collection review.** Choose **3** for March 2–29, 2026. Nadia has confirmed consecutive shortfalls. Theo's inclusion depends on the disputed March 23 visit. Open each patient's therapy review for the same date range and choose **5 → 1** for the source-backed encounter detail. [Worked answers](outputs/evaluation-review.md)
+
+</details>
 
 <details>
 <summary>Scriptable CLI and input formats</summary>
@@ -42,9 +50,9 @@ Text and DOCX files can be imported directly. Text-layer PDFs require `pdftotext
 - **Approach.** Hash files to detect duplicates, extract evidence with deterministic rules, and store quotes and source lines in SQLite. Reconcile conflicting records and recompute only the affected encounters and weeks. Reviews use the saved evidence and report uncertainty when the record does not settle a verdict.
 - **Decision tested.** Batch the read of saved cohort weeks. This saved time when prior results could be reused. With an empty week cache, both versions took about **134 ms**. [Before and after](#validation) · [Benchmark setup](#next-optimization)
 - **Observed limitation and next test.** A correction still scans the affected patient's claims before deciding what to update. It took **5.154 ms** on one synthetic 260-week chart versus **1.735 ms** in a larger collection with 24 weeks per patient. Test encounter-scoped claim lookups on long charts and compare verdicts and source evidence with a full replay, including plan and coverage changes. [Incremental test](outputs/design-validation.md#incremental-updates)
-- **First bottleneck at a million documents.** Expect cold extraction of new files to dominate. Extraction took **3.82 of 5.07 seconds** in a run with 6,000 unique synthetic documents. A million-document run remains unmeasured. Profile extraction, file reads, and write time separately on a representative source mix. [Scale measurements](outputs/synthetic-scale.json)
-- **Runtime and model cost.** On the 31-file development chart, local medians were **27 ms** for a cold import, **0.56 ms** for a warm patient query, and **44 ms** for the same query in a fresh CLI process. Import and review use **zero model calls and $0 in model API cost**. [Benchmark data](outputs/benchmarks.json)
-- **Coding and model assistance.** Codex helped implement, test, and document the project. The original fixture pass used Gemini 3.8 Flash (Medium), Claude Sonnet 4.6 (Thinking), and GPT-OSS 120B (Medium). The hardening pass used GPT-6.2 Astra, Claude Fable 5.2, and Gemini 4 Hydrogen at extra-high effort. Design follow-ups also used high effort for Fable and Hydrogen. Per-run subscription costs for the model assistance are unavailable. [Fixture provenance](tests/edge_cases.md)
+- **First bottleneck at a million documents.** Expect cold extraction of new files to dominate. The import loop reads and extracts each new file inside the write transaction. Extraction took **3.82 of 5.07 seconds** in a run with 6,000 unique synthetic documents. A million-document run remains unmeasured. Profile extraction, file reads, and write time on representative inputs. [Import loop](ledger.py#L132-L133) · [Scale measurements](outputs/synthetic-scale.json)
+- **Runtime, size, and model cost.** The 31-file development chart took **27 ms** to import and saved a **380 KiB** ledger. Its patient query took **0.56 ms** warm or **44 ms** in a fresh CLI process. The 25-file public example took **21 ms** to import, saved **372 KiB**, and answered a detailed cohort query in **0.52 ms** warm or **44 ms** in a fresh process. These are local medians. Import and review use **zero model calls and $0 in model API cost**. [Benchmark data](outputs/benchmarks.json)
+- **Coding and model assistance.** Codex helped implement, test, and document the project. The original fixture pass used Gemini 3.8 Flash (Medium), Claude Sonnet 4.6 (Thinking), and GPT-OSS 120B (Medium). The hardening pass used GPT-6.2 Astra, Claude Fable 5.2, and Gemini 4 Hydrogen at extra-high effort. The delivery review used Astra at extra-high effort and Fable and Hydrogen at high effort. Per-run subscription costs are unavailable. [Fixture provenance](tests/edge_cases.md)
 
 ## Validation
 
@@ -88,7 +96,7 @@ flowchart TB
 
 </details>
 
-- **Import.** Hash each file, extract and cite new evidence, then update affected encounters and weeks in one transaction. Files with no extracted evidence remain visible for review.
+- **Import.** Hash each file, extract cited claims, and update affected encounters and weeks in one SQLite write transaction. The CLI saves readable files and reports file-level failures. Files without extracted evidence remain visible for review.
 - **Review.** Read saved encounters and week results. A cohort review recalculates missing, clipped, or stale weeks in the same snapshot. Calculations use Python and SQLite with zero model calls.
 
 Code entry points are [guided terminal](terminal.py), [scriptable CLI](clinical.py), [ingest and storage](ledger.py), [encounter reconciliation](reconcile.py), and [review queries](review.py).
@@ -146,11 +154,14 @@ erDiagram
 
 </details>
 
-`documents` and `aliases` preserve source content and paths. `claims` store extracted values and quoted lines. `events` store reconciled encounters and alternatives. `patient_weeks` stores weekly verdicts, coverage, supporting scenarios, and the solver version. The dotted arrows show which records are derived. The `meta` table tracks the extractor version. [SQLite DDL](ledger.py)
+`documents` and `aliases` preserve source content and paths. `claims` store extracted values and quoted lines. Each reconciled `event` retains its claims and the source chosen for each decision. A `patient_weeks` row retains the encounter IDs, verdict, plan and coverage citations, and any supporting scenarios. The dotted arrows show these derivations. The `meta` table tracks the extractor version. [SQLite DDL](ledger.py)
 
 ### HTTP contract (proposed)
 
 The proposed HTTP adapter would call the same ingest and review logic as the CLI.
+
+<details>
+<summary>Routes and example request</summary>
 
 | Route | Request | Response |
 | --- | --- | --- |
@@ -159,9 +170,6 @@ The proposed HTTP adapter would call the same ingest and review logic as the CLI
 | `POST /v1/reviews` | Query type, inclusive date range, and patient ID for a patient review. Optional expected revision and evidence detail. | `200` with the read revision, typed result, and source anchors |
 
 The adapter checks authorization and returns the revision used for the answer. It returns `409` for an expected revision mismatch or an idempotency key reused with a different manifest.
-
-<details>
-<summary>Review types and example request</summary>
 
 Review types are `weekly_goal`, `dose_summary`, `day_reconstruction`, `symptom_evidence`, `plan_change`, and `consecutive_below_goal`. Use `detail: "evidence"` for the full trace. Repeating an ingest request with the same key and manifest returns the same job.
 
@@ -196,6 +204,8 @@ The example revision is illustrative. The two possible totals come from the sign
 </details>
 
 ### One review request, end to end
+
+This diagram shows the proposed HTTP adapter calling the existing review engine.
 
 ![A review request pins a database revision and returns saved or computed evidence](docs/diagrams/review-request.png)
 
@@ -233,6 +243,8 @@ sequenceDiagram
 The proposed adapter answers and cites evidence from one revision. The worker publishes a revision after its updates commit. If a required file fails, the previous revision stays active.
 
 ### Design for 500,000
+
+The diagram below is the proposed deployment.
 
 **Documents.** Ingest each delivery from a manifest and refresh affected results. In the cold-import test, text extraction took **3.82 of 5.07 seconds** for a collection with 6,000 unique documents. [Incremental results](#validation) · [Cold import test](outputs/synthetic-scale.json)
 
@@ -308,9 +320,10 @@ Benchmark time under the write lock and compare retries with a serial import. On
 ## Results and reproducibility
 
 - **Development chart.** Rowan attended 12 sessions on 11 days, for **585 or 595 minutes**. [Five development answers](outputs/development-review.md)
+- **Inspect the abstraction.** [Saved SQLite](outputs/combined.sqlite) · [Rowan's structured evidence](outputs/rowan-abstraction.json) · [Five computed answers](outputs/development-answers.json)
 - **Additional charts.** [Cohort results](outputs/evaluation-review.md) · [Plan change](outputs/plan-change.json)
 - **Sources.** Two public mirrors supplied matching copies of the 31 development files and the provided question file because the organizer's Drive folder was unavailable. The evaluation charts come from a separate public example set. [Sources and checksums](source-manifest.json)
-- **Tests.** The curated suite passed 26/26 deliveries. [Fixtures and model contributions](tests/edge_cases.md) · [Benchmark results](outputs/benchmarks.json)
+- **Verification.** The curated suite passed 26/26 deliveries. [Execution log](logs/incremental-reproduce.log) · [Source audit](logs/audit.log) · [Fixtures and model contributions](tests/edge_cases.md) · [Benchmark results](outputs/benchmarks.json)
 
 ```sh
 python3 -m unittest discover -s tests -v

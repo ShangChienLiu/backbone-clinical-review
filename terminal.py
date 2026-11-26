@@ -51,12 +51,26 @@ def open_workspace(folder):
 
 def minutes(record):
     low, high = record["minute_min"], record["minute_max"]
-    options = record["minute_values"]
+    options = record.get("minute_values", ())
     if len(options) == 2:
         return f"{options[0]:g} or {options[1]:g} min"
     if high is None:
         return f"at least {low:g} min (upper bound unknown)"
     return f"{low:g} min" if low == high else f"{low:g}–{high:g} min"
+
+
+def hours(record):
+    def clock(value):
+        whole, remainder = divmod(value, 60)
+        return f"{whole:g} h {remainder:g} min" if remainder else f"{whole:g} h"
+
+    low, high = record["minute_min"], record["minute_max"]
+    options = record["minute_values"]
+    if len(options) == 2:
+        return f"{clock(options[0])} or {clock(options[1])}"
+    if high is None:
+        return f"at least {clock(low)}"
+    return clock(low) if low == high else f"{clock(low)}–{clock(high)}"
 
 
 def confirmed_count(low, high):
@@ -67,14 +81,23 @@ def confirmed_count(low, high):
     return f"{low} confirmed (up to {high})"
 
 
-def show_dose(record):
+def show_dose(record, indent=""):
     sessions = record["sessions_confirmed"]
     session_upper = sessions + record["sessions_possible_additional"]
     days, day_upper = record["days_confirmed"], record["days_possible_upper"]
     session_label = "session" if sessions == session_upper == 1 else "sessions"
     day_label = "day" if days == day_upper == 1 else "days"
-    print(f'{confirmed_count(sessions, session_upper)} {session_label}'
+    print(f'{indent}{confirmed_count(sessions, session_upper)} {session_label}'
           f' · {confirmed_count(days, day_upper)} therapy {day_label} · {minutes(record)}')
+
+
+def show_services(record, indent="  "):
+    for service, counts in record["by_service"].items():
+        confirmed = counts["confirmed"]
+        session_upper = confirmed + counts["unresolved"]
+        label = "session" if confirmed == session_upper == 1 else "sessions"
+        print(f"{indent}{service}: {confirmed_count(confirmed, session_upper)} {label}"
+              f" · {minutes(counts)} of encounter time")
 
 
 def citation(source):
@@ -86,7 +109,7 @@ def show_weeks(result, goals=True):
         print(f'  Week of {week["monday"]}  {week["days_confirmed"]} confirmed days'
               f' · {minutes(week)}', end="")
         if not goals:
-            print()
+            print(f" · {hours(week)}")
             continue
         print(f' · {week["goal_status"]}')
         if week["plan"]:
@@ -120,10 +143,18 @@ def show_event(event, detail=False):
 def show_assessments(result, with_observations=False):
     if not result["assessments"]:
         print("No assessments documented in this window.")
+    documented = {}
     for item in result["assessments"]:
         score = item["score"] if item["score"] is not None else item["status"]
         anchors = ", ".join(dict.fromkeys(citation(source) for source in item["sources"]))
         print(f'  {item["date"]} {item["instrument"]} {score} [{anchors}]')
+        if item["status"] == "documented" and item["score"] is not None:
+            documented.setdefault(item["instrument"], []).append(item)
+    for instrument, items in documented.items():
+        first, last = items[0], items[-1]
+        if first["date"] != last["date"]:
+            delta = last["score"] - first["score"]
+            print(f'  Documented {instrument} change: {first["score"]} to {last["score"]} ({delta:+d} points)')
     for issue in result["issues"]:
         print(f"  {issue}")
     if with_observations:
@@ -148,19 +179,14 @@ def development(db):
     print(f'\n{item["id"]} · {DEV_TITLES[int(pick) - 1]}')
     if pick == "1":
         show_dose(result["total"])
-        for service, counts in result["total"]["by_service"].items():
-            print(f'  {service}: {counts["confirmed"]} confirmed')
+        show_services(result["total"])
         print(f'  Scope: {result["scope"]}.')
+        print("  Encounter evidence")
         for event in result["events"]:
-            if event["issues"] or event["attendance"] != "attended":
-                show_event(event)
+            show_event(event)
     elif pick == "2":
         show_dose(result["total"])
-        low, high = result["total"]["hour_min"], result["total"]["hour_max"]
-        hours = f"{low:.2f}" if low == high else (
-            f"{low:.2f}–{high:.2f}" if high is not None else f"at least {low:.2f}"
-        )
-        print(f"  Overall: {hours} hours")
+        print(f'  Overall: {hours(result["total"])}')
         show_weeks(result, goals=False)
         for event in result["events"]:
             if event["minute_min"] != event["minute_max"]:
@@ -225,6 +251,7 @@ def patient_review(db):
     if selection == "1":
         result = window_review(db, patient_id, start, end)
         show_dose(result["total"])
+        show_services(result["total"])
         print(f'  Scope: {result["scope"]}.')
         show_weeks(result)
     elif selection == "2":
@@ -239,8 +266,13 @@ def patient_review(db):
             print(f'  Effective {change["effective_date"]}')
             for label, key in (("Before", "previous_plan"), ("After", "new_plan")):
                 plan = change[key]
-                print(f'    {label}: {plan["value"]["days"]} days / {plan["value"]["minutes"]:g} min '
+                period = change[label.lower()]
+                first, last = period["window"]
+                print(f"    {label}: {first} to {last}")
+                print(f'      Goal: {plan["value"]["days"]} days / {plan["value"]["minutes"]:g} min '
                       f'[{citation(plan)}]')
+                show_dose(period["total"], indent="      Documented care: ")
+                show_services(period["total"], indent="      ")
     else:
         raise ValueError("Choose a review from 1 to 3.")
     return result
