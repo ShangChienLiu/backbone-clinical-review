@@ -4,7 +4,7 @@ A Python and SQLite tool for reviewing clinical records. Import documents once, 
 
 Two signed notes disagree about one of Rowan's sessions. The weekly total could be **145 or 155 minutes** against a **150-minute goal**. Backbone reports **cannot determine** and cites both notes. [Worked example](outputs/development-review.md)
 
-[Run it](#run-locally) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Trade-offs](#next-optimization) · [Validation](#validation)
+[Run it](#run-locally) · [Take-home summary](#take-home-summary) · [System design](#system-design-whiteboard) · [HTTP contract](#http-contract-proposed) · [Scale plan](#design-for-500000) · [Trade-offs](#next-optimization)
 
 ## Run locally
 
@@ -13,6 +13,8 @@ On a Mac with Python 3.10 or newer, download and unzip the release, then double-
 If you need Python, install it using the official macOS installer, then reopen **Start.command**. You can also open Terminal and run `python3 terminal.py` from the extracted folder. [Python for macOS](https://www.python.org/downloads/macos/)
 
 Press **1** for the five original questions, **2** for a patient review, **3** for a cohort summary, **4** to import documents, or **5** to export JSON. The database and exports stay local under `.backbone/`.
+
+To verify imports, unzip the fictional sample and import `01-original`. Review Avery Demo and expect **3 sessions on 3 days, 140 minutes, not met**. Then import `02-correction` and review again for **150 minutes, met**. The sample includes the expected import counts. [Download the import sample](https://github.com/ShangChienLiu/backbone-clinical-review/releases/download/v1.2.2/backbone-import-demo.zip)
 
 From source, run `python3 terminal.py` with Python 3.10 or newer.
 
@@ -34,6 +36,15 @@ python3 clinical.py --db review.sqlite ingest /path/to/new-delivery
 Text and DOCX files can be imported directly. Text-layer PDFs require `pdftotext`. Scanned PDFs require OCR text. Pass `--workspace /path/to/folder` to the guided terminal to use a different workspace. [Saved three-patient database](outputs/combined.sqlite)
 
 </details>
+
+## Take-home summary
+
+- **Approach.** Hash files to detect duplicates, extract evidence with deterministic rules, and store quotes and source lines in SQLite. Reconcile conflicting records and recompute only the affected encounters and weeks. Reviews use the saved evidence and report uncertainty when the record does not settle a verdict.
+- **Decision tested.** Batch the read of saved cohort weeks. On 6,500 synthetic files, the median for a full-window summary dropped from **71.56 ms to 49.50 ms** with identical output. With an empty week cache, both versions took about **134 ms**. Batching pays off when prior results can be reused. [Benchmark and trade-offs](#next-optimization)
+- **Observed limitation and next test.** A correction still scans the affected patient's claims before deciding what to update. It took **5.154 ms** on one synthetic 260-week chart versus **1.735 ms** in a larger collection with 24 weeks per patient. Test encounter-scoped claim lookups on long charts and compare verdicts and source evidence with a full replay, including plan and coverage changes. [Incremental test](outputs/design-validation.md#incremental-updates)
+- **First bottleneck at a million documents.** Expect cold extraction of new files to dominate. Extraction took **3.82 of 5.07 seconds** in a run with 6,000 unique synthetic documents. A million-document run remains unmeasured. Profile extraction, file reads, and write time separately on a representative source mix. [Scale measurements](outputs/synthetic-scale.json)
+- **Runtime and model cost.** On the 31-file development chart, local medians were **27 ms** for a cold import, **0.56 ms** for a warm patient query, and **44 ms** for the same query in a fresh CLI process. Import and review use **zero model calls and $0 in model API cost**. [Benchmark data](outputs/benchmarks.json)
+- **Coding and model assistance.** Codex helped implement, test, and document the project. The original fixture pass used Gemini 3.8 Flash (Medium), Claude Sonnet 4.6 (Thinking), and GPT-OSS 120B (Medium). The hardening pass used GPT-6.2 Astra, Claude Fable 5.2, and Gemini 4 Hydrogen at extra-high effort. Design follow-ups also used high effort for Fable and Hydrogen. Per-run subscription costs for the model assistance are unavailable. [Fixture provenance](tests/edge_cases.md)
 
 ## System design whiteboard
 

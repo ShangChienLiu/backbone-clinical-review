@@ -12,7 +12,7 @@ from contextlib import closing
 from datetime import date, datetime
 from pathlib import Path
 
-from ledger import database, dump, ingest, patients
+from ledger import database, dump, get_claims, ingest, patients
 from review import cohort_review, plan_changes, route, symptom_review, window_review
 
 if getattr(sys, "frozen", False):
@@ -192,6 +192,9 @@ def input_window(db, patient_id=None):
     sql = "SELECT MIN(date), MAX(date) FROM claims"
     if patient_id:
         default = db.execute(sql + " WHERE patient_id=?", (patient_id,)).fetchone()
+        for episode in get_claims(db, patient_id, ("episode",)):
+            first, last = episode["value"]
+            default = min(default[0] or first, first), max(default[1] or last, last)
     else:
         default = db.execute(sql).fetchone()
     dates = []

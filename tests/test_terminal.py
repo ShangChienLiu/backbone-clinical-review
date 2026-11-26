@@ -8,7 +8,7 @@ import sys
 import tempfile
 import unittest
 
-from test_incremental_certainty import PATIENT, PLAN
+from test_incremental_certainty import PATIENT, PLAN, visit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -41,3 +41,9 @@ class TerminalTest(unittest.TestCase):
             output = run(["4", str(delivery), "2", ""])
             self.assertIn("0 new with evidence · 0 new without evidence · 1 reused", output)
             self.assertIn(PATIENT, output)
+
+            (delivery / "visit.txt").write_text(
+                visit("ZZ-D3", "ZZ-E1", "2026-04-10", "09:00-09:45"), encoding="utf-8")
+            output = run(["4", str(delivery), "2", "4", "", "", "1"])
+            self.assertIn("End [2026-04-12]", output)
+            self.assertIn("1 session · 1 therapy day · 45 min", output)
