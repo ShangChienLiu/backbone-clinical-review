@@ -8,7 +8,9 @@ Two signed notes disagree about one of Rowan's sessions. The weekly total could 
 
 ## Run locally
 
-On an Apple Silicon Mac, download and unzip the release, then double-click **Start.command**. The ZIP includes Python and a demo database. [Download the Mac release](https://github.com/ShangChienLiu/backbone-clinical-review/releases/latest)
+On a Mac with Python 3.10 or newer, download and unzip the release, then double-click **Start.command**. The launcher uses your installed Python. The ZIP includes a demo database. [Download the Mac release](https://github.com/ShangChienLiu/backbone-clinical-review/releases/latest)
+
+If you need Python, install it using the official macOS installer, then reopen **Start.command**. You can also open Terminal and run `python3 terminal.py` from the extracted folder. [Python for macOS](https://www.python.org/downloads/macos/)
 
 Press **1** for the five original questions, **2** for a patient review, **3** for a cohort summary, **4** to import documents, or **5** to export JSON. The database and exports stay local under `.backbone/`.
 
